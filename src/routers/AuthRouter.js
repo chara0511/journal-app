@@ -5,11 +5,15 @@ import Signup from "../components/Auth/Signup";
 
 const AuthRouter = () => {
   return (
-    <Switch>
-      <Route exact path="/auth/login" component={Login} />
-      <Route exact path="/auth/signup" component={Signup} />
-      <Redirect to="/auth/login" />
-    </Switch>
+    <div className="auth__main">
+      <div className="auth__container">
+        <Switch>
+          <Route exact path="/auth/login" component={Login} />
+          <Route exact path="/auth/signup" component={Signup} />
+          <Redirect to="/auth/login" />
+        </Switch>
+      </div>
+    </div>
   );
 };
 
