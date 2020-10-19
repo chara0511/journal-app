@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
+  font-size: $md;
 }
 
 main {
@@ -35,7 +35,8 @@ h2,
 h3,
 h4,
 h4,
-h6 {
+h6,
+p {
   margin: 0px;
 }
 

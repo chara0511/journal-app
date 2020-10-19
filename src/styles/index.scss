@@ -1,7 +1,8 @@
-@import "./base/settings";
-@import "./base/base";
+@import "./base/theme";
+@import "./base/globalStyles";
 
 // Components
 
 @import "./components/auth";
 @import "./components/buttons";
+@import "./components/main";

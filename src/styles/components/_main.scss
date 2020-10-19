@@ -1,0 +1,98 @@
+.main__container {
+  display: flex;
+}
+
+.main__sidebar {
+  background-color: $dark-grey;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1em;
+  max-width: 450px;
+  width: 100%;
+}
+
+.main__sidebar_navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__new_entry {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  cursor: pointer;
+  transition: $transition;
+
+  & svg {
+    width: 48px;
+    height: 48px;
+    fill: $white;
+  }
+
+  &:hover {
+    color: $light_grey;
+
+    & svg {
+      width: 48px;
+      height: 48px;
+      fill: $light_grey;
+    }
+  }
+}
+
+.main__entries {
+  flex: 1 1 auto;
+  margin: 30px 0;
+  overflow-y: scroll;
+}
+
+.main__entry {
+  background-color: $white;
+  border-radius: 3px;
+  color: $dark-grey;
+  display: flex;
+  margin-bottom: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background-color: $light_grey;
+  }
+}
+
+.main__entry_picture {
+  background-size: cover;
+  min-height: 75px;
+  max-width: 75px;
+  width: 100%;
+}
+
+.main__entry_content {
+  padding: 8px;
+}
+
+.main__entry_title {
+  font-size: $sm;
+  font-weight: 700;
+}
+
+.main__entry_description {
+  font-size: $xs;
+}
+
+.main__entry_date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: $sm;
+  text-align: center;
+
+  & span {
+    font-weight: 700;
+  }
+}
