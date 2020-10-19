@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <h1 className="auth__title">Login</h1>
+      <h1 className="auth__title">Log in</h1>
 
       <form action="" noValidate>
         <input
