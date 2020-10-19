@@ -1,4 +1,5 @@
 import React from "react";
+import { MenuIcon } from "../../icons";
 import SideBar from "./SideBar";
 
 const Main = () => {
@@ -6,7 +7,9 @@ const Main = () => {
     <div className="main__container">
       <SideBar />
 
-      <main>Main Content</main>
+      <main>
+        <MenuIcon />
+      </main>
     </div>
   );
 };

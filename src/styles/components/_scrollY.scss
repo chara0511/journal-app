@@ -1,0 +1,33 @@
+.scrollY {
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: lighten($color: $dark_grey, $amount: 35);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    &:hover,
+    &:active {
+      background-color: lighten($color: $dark_grey, $amount: 30);
+      box-shadow: $boxShadow;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $light_grey;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    &:hover,
+    &:active {
+      background-color: darken($color: $light_grey, $amount: 10);
+    }
+  }
+}

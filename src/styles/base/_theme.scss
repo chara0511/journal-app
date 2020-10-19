@@ -15,4 +15,8 @@ $lg: 18px;
 $xl: 24px;
 
 // transition
-$transition: all 0.3s ease;
+$normalTransition: all 0.3s ease;
+$cubicTransition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+//shadow
+$boxShadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

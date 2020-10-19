@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarIcon } from "../../icons";
+import { CalendarIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
 import Entries from "./Entries";
 
 const SideBar = () => {
@@ -7,10 +7,12 @@ const SideBar = () => {
     <aside className="main__sidebar">
       <div className="main__sidebar_navbar">
         <h3>
-          <span>Chara-</span>
+          Welcome, <span>Chara-</span>
         </h3>
 
-        <button type="submit">Log out</button>
+        <button className="button_rounded">
+          <MenuOpenIcon />
+        </button>
       </div>
 
       <div className="main__new_entry">
@@ -20,6 +22,10 @@ const SideBar = () => {
       </div>
 
       <Entries />
+
+      <button className="main__logout" type="submit">
+        <span>Log out</span> <LogoutIcon />
+      </button>
     </aside>
   );
 };
