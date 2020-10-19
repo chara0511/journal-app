@@ -36,11 +36,11 @@ const Signup = () => {
         />
 
         <button className="button button_primary" type="submit">
-          Login
+          Sign up
         </button>
 
         <div className="auth__social_networks">
-          <p>Login with social networks</p>
+          <p>Sign up with social networks</p>
 
           <div className="google-button">
             <div className="google-icon-wrapper">

@@ -1,0 +1,13 @@
+.unselected__container {
+  align-self: center;
+  background-color: $lightGrayishBlue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  & p {
+    text-align: center;
+    margin: 1em 0;
+  }
+}

@@ -16,11 +16,11 @@ const Login = () => {
         <input className="auth__input" type="password" placeholder="Password" />
 
         <button className="button button_primary" type="submit">
-          Login
+          Log in
         </button>
 
         <div className="auth__social_networks">
-          <p>Login with social networks</p>
+          <p>Log in with social networks</p>
 
           <div className="google-button">
             <div className="google-icon-wrapper">

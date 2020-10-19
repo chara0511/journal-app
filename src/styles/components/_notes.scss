@@ -1,0 +1,32 @@
+.notes__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.notes__bar {
+  align-items: center;
+  background-color: $primary;
+  display: flex;
+  color: $white;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.notes__content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.notes__input_title,
+.notes__textarea_desc {
+  margin-bottom: 1em;
+  resize: none;
+  background-color: $white;
+}
+
+.notes__image img {
+  height: 150px;
+  box-shadow: $boxShadow;
+}

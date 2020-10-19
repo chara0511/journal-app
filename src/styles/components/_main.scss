@@ -1,5 +1,9 @@
 .main__container {
   display: flex;
+
+  & main {
+    flex: 1;
+  }
 }
 
 .main__sidebar {

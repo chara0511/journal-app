@@ -1,6 +1,7 @@
 import React from "react";
-import { MenuIcon } from "../../icons";
+import Notes from "../Notes/Notes";
 import SideBar from "./SideBar";
+//import Unselected from "./Unselected";
 
 const Main = () => {
   return (
@@ -8,7 +9,8 @@ const Main = () => {
       <SideBar />
 
       <main>
-        <MenuIcon />
+        {/* <Unselected /> */}
+        <Notes />
       </main>
     </div>
   );
