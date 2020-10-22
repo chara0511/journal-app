@@ -1,13 +1,17 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logIn } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateLogin } from "../../validations/validateLogin";
 
 const Login = () => {
   const initialState = { email: "", password: "" };
 
+  const dispatch = useDispatch();
+
   const successLogin = () => {
-    console.log("submitted");
+    dispatch(logIn(email, password));
   };
 
   const ref = useRef(null);

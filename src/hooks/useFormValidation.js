@@ -13,6 +13,7 @@ export const useFormValidation = (initialState, validateFn, successFn) => {
 
       if (noErrors) {
         successFn();
+        setValues(initialState);
       }
 
       setSubmit(false);
