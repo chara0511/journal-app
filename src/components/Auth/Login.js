@@ -1,19 +1,54 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useFormValidation } from "../../hooks/useFormValidation";
+import { validateLogin } from "../../validations/validateLogin";
 
 const Login = () => {
+  const initialState = { email: "", password: "" };
+
+  const successLogin = () => {
+    console.log("submitted");
+  };
+
+  const ref = useRef(null);
+
+  const {
+    values: { email, password },
+    errors,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormValidation(initialState, validateLogin, successLogin);
+
   return (
     <>
       <h1 className="auth__title">Log in</h1>
 
-      <form action="" noValidate>
+      <form action="" noValidate onSubmit={handleSubmit}>
         <input
-          className="auth__input"
+          ref={ref}
           type="email"
+          className="auth__input"
           placeholder="Email address"
+          name="email"
+          value={email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
 
-        <input className="auth__input" type="password" placeholder="Password" />
+        {errors && <p>{errors.email}</p>}
+
+        <input
+          type="password"
+          className="auth__input"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+
+        {errors && <p>{errors.password}</p>}
 
         <button className="button button_primary" type="submit">
           Log in

@@ -3,7 +3,7 @@
 //   name: "Chara-"
 // }
 
-import { LOG_IN } from "../types";
+import { LOG_IN, LOG_OUT } from "../types";
 
 export const authReducer = (state = {}, action) => {
   switch (action.type) {
@@ -12,6 +12,9 @@ export const authReducer = (state = {}, action) => {
         uid: action.payload.uid,
         name: action.payload.displayName,
       };
+
+    case LOG_OUT:
+      return {};
 
     default:
       return state;
