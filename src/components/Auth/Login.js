@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { logIn } from "../../actions/auth";
+import { logIn, logInByGoogle } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateLogin } from "../../validations/validateLogin";
 
@@ -23,6 +23,10 @@ const Login = () => {
     handleChange,
     handleSubmit,
   } = useFormValidation(initialState, validateLogin, successLogin);
+
+  const handleGoogleLogIn = () => {
+    dispatch(logInByGoogle());
+  };
 
   return (
     <>
@@ -61,7 +65,7 @@ const Login = () => {
         <div className="auth__social_networks">
           <p>Log in with social networks</p>
 
-          <div className="google-button">
+          <div className="google-button" onClick={handleGoogleLogIn}>
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"
