@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logIn, logInByGoogle } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
-import { validateLogin } from "../../validations/validateLogin";
+import { validateLogIn } from "../../validations";
 
 const Login = () => {
   const initialState = { email: "", password: "" };
 
-  const dispatch = useDispatch();
-
-  const successLogin = () => {
+  const successLogIn = () => {
     dispatch(logIn(email, password));
   };
+
+  const dispatch = useDispatch();
 
   const ref = useRef(null);
 
@@ -22,7 +22,7 @@ const Login = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-  } = useFormValidation(initialState, validateLogin, successLogin);
+  } = useFormValidation(initialState, validateLogIn, successLogIn);
 
   const handleGoogleLogIn = () => {
     dispatch(logInByGoogle());

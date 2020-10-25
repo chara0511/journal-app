@@ -1,16 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useFormValidation } from "../../hooks/useFormValidation";
+import { validateSignUp } from "../../validations";
 
 const Signup = () => {
+  const initialState = {
+    name: "example",
+    email: "example@example.com",
+    password: "123456",
+    confirmPassword: "123456",
+  };
+
+  const successSignUp = () => {
+    console.log({ name, email, password, confirmPassword });
+  };
+
+  const {
+    values: { name, email, password, confirmPassword },
+    handleChange,
+    handleSubmit,
+  } = useFormValidation(initialState, validateSignUp, successSignUp);
+
   return (
     <>
       <h1 className="auth__title">Sign up</h1>
 
-      <form action="" noValidate>
+      <form onSubmit={handleSubmit} action="" noValidate>
         <input
           className="auth__input"
           type="text"
           name="name"
+          value={name}
+          onChange={handleChange}
           placeholder="Name"
         />
 
@@ -18,6 +39,8 @@ const Signup = () => {
           className="auth__input"
           type="email"
           name="email"
+          value={email}
+          onChange={handleChange}
           placeholder="Email address"
         />
 
@@ -25,6 +48,8 @@ const Signup = () => {
           className="auth__input"
           type="password"
           name="password"
+          value={password}
+          onChange={handleChange}
           placeholder="Password"
         />
 
@@ -32,6 +57,8 @@ const Signup = () => {
           className="auth__input"
           type="password"
           name="confirmPassword"
+          value={confirmPassword}
+          onChange={handleChange}
           placeholder="Confirm Password"
         />
 
