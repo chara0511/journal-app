@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import AlertError from "../../utils/auth/AlertError";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateSignUp } from "../../validations";
 
@@ -17,7 +19,9 @@ const Signup = () => {
 
   const {
     values: { name, email, password, confirmPassword },
+    errors,
     handleChange,
+    handleBlur,
     handleSubmit,
   } = useFormValidation(initialState, validateSignUp, successSignUp);
 
@@ -31,36 +35,50 @@ const Signup = () => {
           type="text"
           name="name"
           value={name}
+          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Name"
         />
+
+        {errors.name && <AlertError error={errors.name} />}
 
         <input
           className="auth__input"
           type="email"
           name="email"
           value={email}
+          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Email address"
         />
+
+        {errors.email && <AlertError error={errors.email} />}
 
         <input
           className="auth__input"
           type="password"
           name="password"
           value={password}
+          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Password"
         />
+
+        {errors.password && <AlertError error={errors.password} />}
 
         <input
           className="auth__input"
           type="password"
           name="confirmPassword"
           value={confirmPassword}
+          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Confirm Password"
         />
+
+        {errors.confirmPassword && (
+          <AlertError error={errors.confirmPassword} />
+        )}
 
         <button className="button button_primary" type="submit">
           Sign up

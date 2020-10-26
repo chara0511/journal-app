@@ -3,13 +3,15 @@ export const validateLogIn = (values) => {
 
   if (!values.email) {
     errors.email = "Email is required.";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email.trim())
+  ) {
     errors.email = "Enter a valid email.";
   }
 
   if (!values.password) {
     errors.password = "Password is required";
-  } else if (values.password.length < 6) {
+  } else if (values.password.trim().length < 6) {
     errors.password = "The password must be at least 6 characters.";
   }
 
@@ -21,8 +23,8 @@ export const validateSignUp = (values) => {
 
   if (!values.name) {
     errors.name = "Name is required.";
-  } else if (values.name.length < 2) {
-    errors.name = "The name must be at least 2 characters";
+  } else if (values.name.trim().length < 2) {
+    errors.name = "The name must be at least 2 characters.";
   }
 
   if (!values.email) {
@@ -32,8 +34,8 @@ export const validateSignUp = (values) => {
   }
 
   if (!values.password) {
-    errors.password = "Password is required";
-  } else if (values.password.length < 6) {
+    errors.password = "Password is required.";
+  } else if (values.password.trim().length < 6) {
     errors.password = "The password must be at least 6 characters.";
   }
 

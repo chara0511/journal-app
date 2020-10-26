@@ -42,11 +42,15 @@
 }
 
 .auth__alert_error {
-  background-color: $danger;
-  border-radius: 3px;
-  color: $white;
+  color: $danger;
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  padding: 5px;
+  align-items: center;
+  font-size: $xs;
+
+  & svg {
+    fill: $danger;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+  }
 }

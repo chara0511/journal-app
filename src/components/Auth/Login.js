@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logIn, logInByGoogle } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
+import AlertError from "../../utils/auth/AlertError";
 import { validateLogIn } from "../../validations";
 
 const Login = () => {
@@ -44,7 +45,7 @@ const Login = () => {
           onChange={handleChange}
         />
 
-        {errors && <p>{errors.email}</p>}
+        {errors.email && <AlertError error={errors.email} />}
 
         <input
           type="password"
@@ -56,7 +57,7 @@ const Login = () => {
           onChange={handleChange}
         />
 
-        {errors && <p>{errors.password}</p>}
+        {errors.password && <AlertError error={errors.password} />}
 
         <button className="button button_primary" type="submit">
           Log in
