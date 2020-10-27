@@ -4,17 +4,23 @@ import { Link } from "react-router-dom";
 import AlertError from "../../utils/auth/AlertError";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateSignUp } from "../../validations";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../actions/auth";
 
 const Signup = () => {
   const initialState = {
     name: "example",
-    email: "example@example.com",
+    email: "example@gmail.com",
     password: "123456",
     confirmPassword: "123456",
   };
 
+  const dispatch = useDispatch();
+
   const successSignUp = () => {
-    console.log({ name, email, password, confirmPassword });
+    console.log({ name, email, password });
+
+    dispatch(signUp(name, email, password));
   };
 
   const {
