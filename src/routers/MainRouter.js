@@ -10,11 +10,10 @@ import PrivateRoute from "./PrivateRoute";
 import { loggedIn } from "../actions/auth";
 
 const MainRouter = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [isLogged, setIsLogged] = useState(false);
-
   const dispatch = useDispatch();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -26,10 +25,8 @@ const MainRouter = () => {
       }
     });
 
-    setIsLoading((prev) => !prev);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setIsLoading(false);
+  }, [dispatch]);
 
   if (isLoading) {
     return <h1>loading...</h1>;
@@ -39,7 +36,11 @@ const MainRouter = () => {
     <Router>
       <div>
         <Switch>
-          <PublicRoute isLogged={isLogged} component={AuthRoutes} />
+          <PublicRoute
+            isLogged={isLogged}
+            path="/auth"
+            component={AuthRoutes}
+          />
           <PrivateRoute exact path="/" isLogged={isLogged} component={Main} />
           <Redirect to="/auth/login" />
         </Switch>

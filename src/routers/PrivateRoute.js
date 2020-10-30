@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
+  console.log(isLogged);
   return (
     <Route
       {...rest}

@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 
 const PublicRoute = ({ isLogged, component: Component, ...rest }) => {
+  console.log(isLogged);
   return (
     <Route
       {...rest}
       component={(props) =>
-        !isLogged ? <Component {...props} /> : <Redirect to="/" />
+        isLogged ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   );
