@@ -14,7 +14,6 @@ export const authReducer = (state = {}, action) => {
 
     case LOG_IN:
       return {
-        ...state,
         uid: action.payload.uid,
         displayName: action.payload.displayName,
         loading: false,
