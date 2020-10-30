@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logIn, logInByGoogle } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
@@ -24,6 +24,8 @@ const Login = () => {
     handleChange,
     handleSubmit,
   } = useFormValidation(initialState, validateLogIn, successLogIn);
+
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleLogInByGoogle = () => {
     dispatch(logInByGoogle());
@@ -59,9 +61,15 @@ const Login = () => {
 
         {errors.password && <AlertError error={errors.password} />}
 
-        <button className="button button_primary" type="submit">
+        <button
+          className="button button_primary"
+          type="submit"
+          disabled={loading}
+        >
           Log in
         </button>
+
+        {error && <AlertError error={error} />}
 
         <div className="auth__social_networks">
           <p>Log in with social networks</p>

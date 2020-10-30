@@ -1,5 +1,5 @@
 import { firebase, googleAuthProvider } from "../firebase/firebasConfig";
-import { LOADING, LOG_IN } from "../types";
+import { ERROR, LOADING, LOG_IN } from "../types";
 
 const loading = () => ({ type: LOADING });
 
@@ -7,6 +7,8 @@ const logged = (uid, displayName) => ({
   type: LOG_IN,
   payload: { uid, displayName },
 });
+
+const loginError = (message) => ({ type: ERROR, payload: message });
 
 export const logIn = (email, password) => async (dispatch) => {
   dispatch(loading());
@@ -20,7 +22,8 @@ export const logIn = (email, password) => async (dispatch) => {
 
     dispatch(logged(user.uid, user.displayName));
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+    dispatch(loginError(error.message));
   }
 };
 

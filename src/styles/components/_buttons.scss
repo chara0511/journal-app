@@ -10,12 +10,13 @@
   transition: $cubicTransition;
 
   &:disabled {
+    cursor: not-allowed;
     background-color: lighten($color: $primary, $amount: 15);
   }
 
-  &:hover {
-    background-color: darken($color: $primary, $amount: 25);
-  }
+  // &:hover {
+  //   background-color: darken($color: $primary, $amount: 25);
+  // }
 }
 
 .button_rounded {
