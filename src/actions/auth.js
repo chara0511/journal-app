@@ -1,28 +1,43 @@
 import { firebase, googleAuthProvider } from "../firebase/firebasConfig";
-import { LOG_IN } from "../types";
+import { LOADING, LOG_IN } from "../types";
 
-const sendData = (uid, displayName) => ({
+const loading = () => ({ type: LOADING });
+
+const logged = (uid, displayName) => ({
   type: LOG_IN,
   payload: { uid, displayName },
 });
 
-export const logIn = (value1, value2) => (dispatch) => {
-  setTimeout(() => {
-    dispatch(sendData(value1, value2));
-  }, 3000);
+export const logIn = (email, password) => async (dispatch) => {
+  dispatch(loading());
+
+  try {
+    const userCreadential = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+
+    const { user } = userCreadential;
+
+    dispatch(logged(user.uid, user.displayName));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const logInByGoogle = () => (dispatch) => {
+  dispatch(loading());
+
   firebase
     .auth()
     .signInWithPopup(googleAuthProvider)
     .then(({ user }) => {
-      console.log(user.uid, user.displayName);
-      dispatch(sendData(user.uid, user.displayName));
+      dispatch(logged(user.uid, user.displayName));
     });
 };
 
 export const signUp = (name, email, password) => async (dispatch) => {
+  dispatch(loading());
+
   try {
     const userCredential = await firebase
       .auth()
@@ -32,7 +47,7 @@ export const signUp = (name, email, password) => async (dispatch) => {
 
     await user.updateProfile({ displayName: name });
 
-    dispatch(sendData(user.uid, user.displayName));
+    dispatch(logged(user.uid, user.displayName));
   } catch (error) {
     console.log(error);
   }

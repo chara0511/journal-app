@@ -25,7 +25,7 @@ const Login = () => {
     handleSubmit,
   } = useFormValidation(initialState, validateLogIn, successLogIn);
 
-  const handleGoogleLogIn = () => {
+  const handleLogInByGoogle = () => {
     dispatch(logInByGoogle());
   };
 
@@ -66,7 +66,7 @@ const Login = () => {
         <div className="auth__social_networks">
           <p>Log in with social networks</p>
 
-          <div className="google-button" onClick={handleGoogleLogIn}>
+          <div className="google-button" onClick={handleLogInByGoogle}>
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"
