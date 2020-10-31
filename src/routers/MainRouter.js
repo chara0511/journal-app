@@ -20,13 +20,15 @@ const MainRouter = () => {
       if (user?.uid) {
         dispatch(loggedIn(user.uid, user.displayName));
         setIsLogged(true);
+        setIsLoading(false);
       } else {
         setIsLogged(false);
+        setIsLoading(false);
       }
     });
 
-    setIsLoading(false);
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoading) {
     return <h1>loading...</h1>;
@@ -37,8 +39,8 @@ const MainRouter = () => {
       <div>
         <Switch>
           <PublicRoute
-            isLogged={isLogged}
             path="/auth"
+            isLogged={isLogged}
             component={AuthRoutes}
           />
           <PrivateRoute exact path="/" isLogged={isLogged} component={Main} />
