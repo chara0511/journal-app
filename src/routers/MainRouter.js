@@ -9,6 +9,7 @@ import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { loggedIn } from "../actions/auth";
 import LoadingPage from "../components/Main/LoadingPage";
+import { loadingNotes } from "../actions/notes";
 
 const MainRouter = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const MainRouter = () => {
         dispatch(loggedIn(user.uid, user.displayName));
         setIsLogged(true);
         setIsLoading(false);
+        dispatch(loadingNotes(user.uid));
       } else {
         setIsLogged(false);
         setIsLoading(false);
