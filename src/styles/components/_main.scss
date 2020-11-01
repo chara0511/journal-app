@@ -6,6 +6,19 @@
   }
 }
 
+.main__loading_page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+
+  & svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
 .main__sidebar {
   background-color: $dark-grey;
   color: $white;
@@ -28,11 +41,11 @@
 
 .main__new_entry {
   align-items: center;
+  cursor: pointer;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 1em auto;
-  flex-direction: column;
-  cursor: pointer;
   transition: $normalTransition;
 
   & svg {
@@ -42,10 +55,10 @@
 }
 
 .main__logout {
-  display: flex;
   align-items: center;
-  justify-content: flex-end;
   color: $white;
+  display: flex;
+  justify-content: flex-end;
 
   & span {
     margin-right: 5px;
@@ -61,13 +74,13 @@
 .main__entry {
   background-color: $white;
   border-radius: 4px;
+  box-shadow: $boxShadow;
   color: $dark-grey;
   display: flex;
   margin: 0 3px 10px 2px;
   overflow: hidden;
   cursor: pointer;
   transition: $normalTransition;
-  box-shadow: $boxShadow;
 
   &:hover {
     background-color: $light_grey;
@@ -76,8 +89,8 @@
 
 .main__entry_picture {
   background-size: cover;
-  min-height: 75px;
   max-width: 75px;
+  min-height: 75px;
   width: 100%;
 }
 
@@ -97,10 +110,10 @@
 .main__entry_date {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-size: $sm;
-  text-align: center;
+  justify-content: center;
   padding: 8px;
+  text-align: center;
 
   & span {
     font-weight: 700;

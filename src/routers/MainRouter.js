@@ -8,6 +8,7 @@ import AuthRoutes from "./AuthRoutes";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { loggedIn } from "../actions/auth";
+import LoadingPage from "../components/Main/LoadingPage";
 
 const MainRouter = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const MainRouter = () => {
   }, []);
 
   if (isLoading) {
-    return <h1>loading...</h1>;
+    return <LoadingPage />;
   }
 
   return (

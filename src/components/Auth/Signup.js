@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AlertError from "../../utils/auth/AlertError";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateSignUp } from "../../validations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../actions/auth";
 
 const Signup = () => {
@@ -30,6 +30,8 @@ const Signup = () => {
     handleBlur,
     handleSubmit,
   } = useFormValidation(initialState, validateSignUp, successSignUp);
+
+  const { loading, error } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -86,9 +88,15 @@ const Signup = () => {
           <AlertError error={errors.confirmPassword} />
         )}
 
-        <button className="button button_primary" type="submit">
+        <button
+          className="button button_primary"
+          type="submit"
+          disabled={loading}
+        >
           Sign up
         </button>
+
+        {error && <AlertError error={error} />}
 
         <div className="auth__social_networks">
           <p>Sign up with social networks</p>

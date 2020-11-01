@@ -52,7 +52,7 @@ export const signUp = (name, email, password) => async (dispatch) => {
 
     dispatch(loggedIn(user.uid, user.displayName));
   } catch (error) {
-    console.log(error);
+    dispatch(loginError(error.message));
   }
 };
 

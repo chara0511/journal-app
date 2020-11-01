@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../actions/auth";
-import { CalendarIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
+import { AddIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
 import Entries from "./Entries";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+
+  const { displayName } = useSelector((state) => state.auth);
 
   const handleLogOut = () => {
     dispatch(logOut());
@@ -15,7 +17,7 @@ const SideBar = () => {
     <aside className="main__sidebar">
       <div className="main__sidebar_navbar">
         <h3>
-          Welcome, <span>Chara-</span>
+          Welcome, <span>{displayName}</span>
         </h3>
 
         <button className="button_rounded">
@@ -24,7 +26,7 @@ const SideBar = () => {
       </div>
 
       <div className="main__new_entry">
-        <CalendarIcon />
+        <AddIcon />
 
         <p>New entry</p>
       </div>
