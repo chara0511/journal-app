@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../actions/auth";
+import { addNote } from "../../actions/notes";
 import { AddIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
 import Entries from "./Entries";
 
@@ -8,6 +9,10 @@ const SideBar = () => {
   const dispatch = useDispatch();
 
   const { displayName } = useSelector((state) => state.auth);
+
+  const handleNewEntry = () => {
+    dispatch(addNote());
+  };
 
   const handleLogOut = () => {
     dispatch(logOut());
@@ -25,11 +30,11 @@ const SideBar = () => {
         </button>
       </div>
 
-      <div className="main__new_entry">
+      <button className="main__new_entry" onClick={handleNewEntry}>
         <AddIcon />
 
         <p>New entry</p>
-      </div>
+      </button>
 
       <Entries />
 

@@ -1,7 +1,10 @@
-// {
-//   uid: "00124faggag",
-//   name: "Chara-"
-// }
+/*
+    auth: {
+        uid: "GQBiB36N4ueuZgyxjjaIAaEXpDg1",
+        displayName: "Chara-",
+        loading: false,
+    }
+*/
 
 import { ERROR, LOADING, LOG_IN, LOG_OUT } from "../types";
 
