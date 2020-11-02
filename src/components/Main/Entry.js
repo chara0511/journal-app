@@ -1,26 +1,29 @@
+import dayjs from "dayjs";
 import React from "react";
 
-const Entry = () => {
+const Entry = ({ body, date, id, title, url }) => {
+  const dateFormatted = dayjs(date).format("ddd, DD MMM.");
+  const hourFormatted = dayjs(date).format("HH:mm:ss");
+
   return (
     <div className="main__entry">
-      <div
-        className="main__entry_picture"
-        style={{
-          backgroundImage:
-            "url('https://m.media-amazon.com/images/M/MV5BZDQxMjVmMjYtZTU4OC00MzRhLTljNTgtMTAwMDg3YzhlY2M4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg')",
-        }}
-      ></div>
+      {url && (
+        <div
+          className="main__entry_picture"
+          style={{
+            backgroundImage: `url(${url})`,
+          }}
+        ></div>
+      )}
 
       <div className="main__entry_content">
-        <h3 className="main__entry_title">A good day</h3>
-        <p className="main__entry_description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
+        <h3 className="main__entry_title">{title}</h3>
+        <p className="main__entry_description">{body}</p>
       </div>
 
       <div className="main__entry_date">
         <p>
-          <span>Fri</span>, 5 Jun.
+          <span>{dateFormatted}</span> {hourFormatted}
         </p>
       </div>
     </div>

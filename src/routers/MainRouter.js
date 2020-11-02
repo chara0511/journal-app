@@ -9,7 +9,7 @@ import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { loggedIn } from "../actions/auth";
 import LoadingPage from "../components/Main/LoadingPage";
-import { loadedNotes, loadingNotes } from "../actions/notes";
+import { loadingNotes } from "../actions/notes";
 
 const MainRouter = () => {
   const dispatch = useDispatch();
@@ -21,10 +21,12 @@ const MainRouter = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(loggedIn(user.uid, user.displayName));
+
+        dispatch(loadingNotes(user.uid));
+
         setIsLogged(true);
+
         setIsLoading(false);
-        const notes = await loadingNotes(user.uid);
-        dispatch(loadedNotes(notes));
       } else {
         setIsLogged(false);
         setIsLoading(false);
