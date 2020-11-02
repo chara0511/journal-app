@@ -49,3 +49,21 @@ export const loadingNotes = (uid) => async (dispatch) => {
 
   dispatch(loadedNotes(notes));
 };
+
+// check this function
+export const getNote = (id) => async (dispatch, getState) => {
+  try {
+    const { uid } = getState().auth;
+
+    const docSnapshot = await db
+      .collection(`${uid}/journal/notes`)
+      .doc(id)
+      .get();
+
+    console.log(docSnapshot.data());
+
+    dispatch(activeNote(id, docSnapshot.data()));
+  } catch (error) {
+    console.log(error);
+  }
+};
