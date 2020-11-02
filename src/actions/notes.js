@@ -1,4 +1,4 @@
-import { db, firebase } from "../firebase/firebasConfig";
+import { db } from "../firebase/firebasConfig";
 import { ACTIVE_NOTE, LOADING_NOTES } from "../types";
 
 export const addNote = () => async (dispatch, getState) => {
@@ -27,18 +27,18 @@ const activeNote = (id, note) => ({
 });
 
 // check this function ...
-export const loadingNotes = (id) => async (dispatch) => {
+export const loadingNotes = async (uid) => {
   try {
-    const document = {};
-
-    const querySnapshot = await db.collection(`${id}/journal/notes`).get();
-
+    const querySnapshot = await db.collection(`${uid}/journal/notes`).get();
+    const notes = [];
     querySnapshot.forEach((note) => {
-      dispatch(loadedNotes(note.data()));
+      notes.push({ id: note.id, ...note.data() });
     });
+
+    return notes;
   } catch (error) {
     console.log(error);
   }
 };
 
-const loadedNotes = (notes) => ({ type: LOADING_NOTES, payload: notes });
+export const loadedNotes = (notes) => ({ type: LOADING_NOTES, payload: notes });

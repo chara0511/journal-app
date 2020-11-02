@@ -9,7 +9,7 @@ import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { loggedIn } from "../actions/auth";
 import LoadingPage from "../components/Main/LoadingPage";
-import { loadingNotes } from "../actions/notes";
+import { loadedNotes, loadingNotes } from "../actions/notes";
 
 const MainRouter = () => {
   const dispatch = useDispatch();
@@ -18,12 +18,13 @@ const MainRouter = () => {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(loggedIn(user.uid, user.displayName));
         setIsLogged(true);
         setIsLoading(false);
-        dispatch(loadingNotes(user.uid));
+        const notes = await loadingNotes(user.uid);
+        dispatch(loadedNotes(notes));
       } else {
         setIsLogged(false);
         setIsLoading(false);
