@@ -11,9 +11,10 @@ export const addNote = () => async (dispatch, getState) => {
     const { uid } = getState().auth;
 
     const newNote = {
-      title: "",
       body: "",
       date: new Date().getTime(),
+      imageURL: null,
+      title: "",
     };
 
     const docReference = await db
@@ -59,8 +60,6 @@ export const getNote = (id) => async (dispatch, getState) => {
       .collection(`${uid}/journal/notes`)
       .doc(id)
       .get();
-
-    console.log(docSnapshot.data());
 
     dispatch(activeNote(id, docSnapshot.data()));
   } catch (error) {

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Entries from "./Entries";
 import { logOut } from "../../actions/auth";
 import { addNote } from "../../actions/notes";
 import { AddIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
-import Entries from "./Entries";
 
 const SideBar = () => {
   const dispatch = useDispatch();
