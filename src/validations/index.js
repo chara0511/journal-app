@@ -47,3 +47,21 @@ export const validateSignUp = (values) => {
 
   return errors;
 };
+
+export const validateNote = (values) => {
+  let errors = {};
+
+  if (!values.title) {
+    errors.email = "Enter a title.";
+  } else if (values.title.trim().length < 1) {
+    errors.email = "The title must be at least 6 characters.";
+  }
+
+  if (!values.body) {
+    errors.password = "Body is required.";
+  } else if (values.password.trim().length < 6) {
+    errors.password = "The body must be at least 6 characters.";
+  }
+
+  return errors;
+};

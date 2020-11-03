@@ -15,6 +15,7 @@ export const addNote = () => async (dispatch, getState) => {
       date: new Date().getTime(),
       imageURL: null,
       title: "",
+      updated: null,
     };
 
     const docReference = await db
@@ -51,7 +52,6 @@ export const loadingNotes = (uid) => async (dispatch) => {
   dispatch(loadedNotes(notes));
 };
 
-// check this function
 export const getNote = (id) => async (dispatch, getState) => {
   try {
     const { uid } = getState().auth;
@@ -62,6 +62,18 @@ export const getNote = (id) => async (dispatch, getState) => {
       .get();
 
     dispatch(activeNote(id, docSnapshot.data()));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateNote = (id, updatedNote) => async (dispatch, getState) => {
+  try {
+    const { uid } = getState().auth;
+
+    await db.collection(`${uid}/journal/notes`).doc(id).update(updatedNote);
+
+    dispatch(activeNote(id, updatedNote));
   } catch (error) {
     console.log(error);
   }
