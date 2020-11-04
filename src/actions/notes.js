@@ -1,3 +1,4 @@
+import axios from "axios";
 import { db } from "../firebase/firebasConfig";
 import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";
 
@@ -74,7 +75,7 @@ export const updateNote = (id, note) => async (dispatch, getState) => {
     const { uid } = getState().auth;
 
     await db.collection(`${uid}/journal/notes`).doc(id).update(note);
-    console.log(id, note);
+
     dispatch(updatedNote(id, note));
   } catch (error) {
     console.log(error);
@@ -85,3 +86,24 @@ const updatedNote = (id, note) => ({
   type: UPDATE_NOTE,
   payload: { id, ...note },
 });
+
+export const fileUpload = (file) => async (dispatch, getState) => {
+  const { active: activeNote } = getState().notes;
+  console.log(activeNote, file);
+
+  const cloudinaryURL = "	https://api.cloudinary.com/v1_1/dfvra50ch/upload";
+
+  const formData = new FormData();
+  formData.append("upload_preset", "journal-app");
+  formData.append("file", file);
+
+  try {
+    const response = await axios.post(cloudinaryURL, formData);
+
+    activeNote.imageURL = response.data.secure_url;
+
+    dispatch(updateNote(activeNote.id, activeNote));
+  } catch (error) {
+    console.log(error);
+  }
+};

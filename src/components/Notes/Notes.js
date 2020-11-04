@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNote } from "../../actions/notes";
+import { updateNote, fileUpload } from "../../actions/notes";
 
 import NotesBar from "./NotesBar";
+
+// journal-app
 
 const Notes = () => {
   const { active: note } = useSelector((state) => state.notes);
@@ -34,8 +36,6 @@ const Notes = () => {
   useEffect(() => {
     setNoteForm(initialState);
 
-    console.log(initialState);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [note.title, note.body, note.imageURL, note.updated]);
 
@@ -46,6 +46,18 @@ const Notes = () => {
 
   const handleChange = ({ target }) => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
+  };
+
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      dispatch(fileUpload(file));
+    }
+  };
+
+  const handleChooseFile = () => {
+    document.querySelector("#file").click();
   };
 
   const dateUpdatedFormatted = dayjs(currentDate).format("ddd, DD MMM.");
@@ -78,12 +90,19 @@ const Notes = () => {
 
         {imageURL && (
           <div className="notes__image">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQe0jSmwLBGW5btkr8uQuhg6xchkUw8GJQ0dw&usqp=CAU"
-              alt=""
-            />
+            <img src={imageURL} alt="" />
           </div>
         )}
+
+        <input
+          id="file"
+          name="file"
+          type="file"
+          onChange={handleFile}
+          style={{ display: "none" }}
+        />
+
+        <button onClick={handleChooseFile}>Choose a file</button>
 
         <span>
           {dateUpdatedFormatted} - {hourUpdatedFormatted}
