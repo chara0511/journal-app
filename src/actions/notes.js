@@ -1,7 +1,7 @@
 import { db } from "../firebase/firebasConfig";
-import { ACTIVE_NOTE, LOADING_NOTES } from "../types";
+import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";
 
-const activeNote = (id, note) => ({
+export const activeNote = (id, note) => ({
   type: ACTIVE_NOTE,
   payload: { id, ...note },
 });
@@ -52,6 +52,8 @@ export const loadingNotes = (uid) => async (dispatch) => {
   dispatch(loadedNotes(notes));
 };
 
+// Other option to get a note (Lazy load).
+
 export const getNote = (id) => async (dispatch, getState) => {
   try {
     const { uid } = getState().auth;
@@ -67,14 +69,19 @@ export const getNote = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateNote = (id, updatedNote) => async (dispatch, getState) => {
+export const updateNote = (id, note) => async (dispatch, getState) => {
   try {
     const { uid } = getState().auth;
 
-    await db.collection(`${uid}/journal/notes`).doc(id).update(updatedNote);
-
-    dispatch(activeNote(id, updatedNote));
+    await db.collection(`${uid}/journal/notes`).doc(id).update(note);
+    console.log(id, note);
+    dispatch(updatedNote(id, note));
   } catch (error) {
     console.log(error);
   }
 };
+
+const updatedNote = (id, note) => ({
+  type: UPDATE_NOTE,
+  payload: { id, ...note },
+});

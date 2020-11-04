@@ -11,7 +11,7 @@
 }
 */
 
-import { ACTIVE_NOTE, LOADING_NOTES } from "../types";
+import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";
 
 const initialState = {
   notes: [],
@@ -30,6 +30,14 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         notes: [...action.payload],
+      };
+
+    case UPDATE_NOTE:
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? action.payload : note
+        ),
       };
 
     default:

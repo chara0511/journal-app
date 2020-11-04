@@ -1,16 +1,20 @@
 import React from "react";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-import { getNote } from "../../actions/notes";
+import { activeNote } from "../../actions/notes";
 
-const Entry = ({ body, date, id, title, imageURL }) => {
+const Entry = ({ body, date, id, title, imageURL, updated }) => {
   const dateFormatted = dayjs(date).format("ddd, DD MMM.");
   const hourFormatted = dayjs(date).format("HH:mm:ss");
+
+  const dateUpdatedFormatted = dayjs(updated).format("ddd, DD MMM.");
+  const hourUpdatedFormatted = dayjs(updated).format("HH:mm:ss");
 
   const dispatch = useDispatch();
 
   const handleActiveNote = () => {
-    dispatch(getNote(id));
+    //dispatch(getNote(id));
+    dispatch(activeNote(id, { body, date, id, imageURL, title, updated }));
   };
 
   return (
@@ -32,6 +36,9 @@ const Entry = ({ body, date, id, title, imageURL }) => {
       <div className="main__entry_date">
         <p>
           <span>{dateFormatted}</span> {hourFormatted}
+        </p>
+        <p>
+          {dateUpdatedFormatted}, {hourUpdatedFormatted}
         </p>
       </div>
     </div>

@@ -10,7 +10,7 @@ const SideBar = () => {
 
   const { displayName } = useSelector((state) => state.auth);
 
-  const handleNewEntry = () => {
+  const handleNewNote = () => {
     dispatch(addNote());
   };
 
@@ -30,10 +30,10 @@ const SideBar = () => {
         </button>
       </div>
 
-      <button className="main__new_entry" onClick={handleNewEntry}>
+      <button className="main__new_entry" onClick={handleNewNote}>
         <AddIcon />
 
-        <p>New entry</p>
+        <p>New note</p>
       </button>
 
       <Entries />

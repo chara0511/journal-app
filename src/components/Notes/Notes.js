@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateNote } from "../../actions/notes";
@@ -25,20 +26,30 @@ const Notes = () => {
     console.log(initialState);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [note.title, note.body, note.imageURL]);
+  }, [note.title, note.body, note.imageURL, note.updated]);
 
   const dispatch = useDispatch();
 
   const handleUpdateNote = (updatedNote) =>
     dispatch(updateNote(note.id, updatedNote));
 
-  // useEffect(() => {
-  //   handleSaveChanges({ title: title, body: body });
-  // }, [title, body]);
-
   const handleChange = ({ target }) => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
   };
+
+  const dateUpdatedFormatted = () => dayjs(updated).format("ddd, DD MMM.");
+  const hourUpdatedFormatted = () => dayjs(updated).format("HH:mm:ss");
+
+  // useEffect(() => {
+  //   const interval = setInterval(
+  //     () => setNoteForm({ ...noteForm, updated: new Date().getTime() }),
+  //     1000
+  //   );
+
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
   return (
     <div className="notes__container">
@@ -74,7 +85,9 @@ const Notes = () => {
           </div>
         )}
 
-        <span>Fri, 05 Jun.</span>
+        <span>
+          {dateUpdatedFormatted()} - {hourUpdatedFormatted()}
+        </span>
 
         <button
           onClick={() =>
