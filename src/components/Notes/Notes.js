@@ -13,12 +13,23 @@ const Notes = () => {
     date: note.date,
     imageURL: note.imageURL,
     title: note.title,
-    updated: new Date().getTime(),
+    updated: note.updated,
   };
 
   const [noteForm, setNoteForm] = useState(initialState);
+  const [currentDate, setCurrentDate] = useState(new Date().getTime());
 
-  const { body, date, imageURL, title, updated } = noteForm;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentDate(new Date().getTime());
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     setNoteForm(initialState);
@@ -28,7 +39,7 @@ const Notes = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [note.title, note.body, note.imageURL, note.updated]);
 
-  const dispatch = useDispatch();
+  const { body, date, imageURL, title } = noteForm;
 
   const handleUpdateNote = (updatedNote) =>
     dispatch(updateNote(note.id, updatedNote));
@@ -37,19 +48,8 @@ const Notes = () => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
   };
 
-  const dateUpdatedFormatted = () => dayjs(updated).format("ddd, DD MMM.");
-  const hourUpdatedFormatted = () => dayjs(updated).format("HH:mm:ss");
-
-  // useEffect(() => {
-  //   const interval = setInterval(
-  //     () => setNoteForm({ ...noteForm, updated: new Date().getTime() }),
-  //     1000
-  //   );
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
+  const dateUpdatedFormatted = dayjs(currentDate).format("ddd, DD MMM.");
+  const hourUpdatedFormatted = dayjs(currentDate).format("HH:mm:ss");
 
   return (
     <div className="notes__container">
@@ -86,12 +86,18 @@ const Notes = () => {
         )}
 
         <span>
-          {dateUpdatedFormatted()} - {hourUpdatedFormatted()}
+          {dateUpdatedFormatted} - {hourUpdatedFormatted}
         </span>
 
         <button
           onClick={() =>
-            handleUpdateNote({ body, date, imageURL, title, updated })
+            handleUpdateNote({
+              body,
+              date,
+              imageURL,
+              title,
+              updated: new Date().getTime(),
+            })
           }
         >
           Save changes
