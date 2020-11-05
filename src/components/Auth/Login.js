@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logIn, logInByGoogle } from "../../actions/auth";
 import { useFormValidation } from "../../hooks/useFormValidation";
+import { EmailIcon, PasswordIcon } from "../../icons";
 import AlertError from "../../utils/auth/AlertError";
 import { validateLogIn } from "../../validations";
 
@@ -35,31 +36,43 @@ const Login = () => {
     <>
       <h1 className="auth__title">Log in</h1>
 
-      <form action="" noValidate onSubmit={handleSubmit}>
-        <input
-          ref={ref}
-          type="email"
-          className="auth__input"
-          placeholder="Email address"
-          name="email"
-          value={email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+      <form className="auth__form" action="" noValidate onSubmit={handleSubmit}>
+        <div className="auth__input">
+          <input
+            ref={ref}
+            type="email"
+            className="auth__input_box"
+            placeholder="Email address"
+            name="email"
+            value={email}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
 
-        {errors.email && <AlertError error={errors.email} />}
+          <span>
+            <EmailIcon />
+          </span>
+        </div>
 
-        <input
-          type="password"
-          className="auth__input"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+        {<AlertError error={errors.email} />}
 
-        {errors.password && <AlertError error={errors.password} />}
+        <div className="auth__input">
+          <input
+            type="password"
+            className="auth__input_box"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+
+          <span>
+            <PasswordIcon />
+          </span>
+        </div>
+
+        {<AlertError error={errors.password} />}
 
         <button
           className="button button_primary"
@@ -69,10 +82,12 @@ const Login = () => {
           Log in
         </button>
 
-        {error && <AlertError error={error} />}
+        {<AlertError error={error} />}
 
         <div className="auth__social_networks">
-          <p>Log in with social networks</p>
+          <p>or</p>
+
+          <p>continue with these social profile</p>
 
           <div className="google-button" onClick={handleLogInByGoogle}>
             <div className="google-icon-wrapper">
@@ -89,7 +104,12 @@ const Login = () => {
           </div>
         </div>
 
-        <Link to="/auth/signup">Create new account</Link>
+        <p className="auth__utils">
+          Don't have an account yet?{" "}
+          <span>
+            <Link to="/auth/signup">Sign up</Link>
+          </span>
+        </p>
       </form>
     </>
   );

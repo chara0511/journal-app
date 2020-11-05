@@ -6,6 +6,7 @@ import { useFormValidation } from "../../hooks/useFormValidation";
 import { validateSignUp } from "../../validations";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../actions/auth";
+import { EmailIcon, PasswordIcon, UsernameIcon } from "../../icons";
 
 const Signup = () => {
   const initialState = {
@@ -38,55 +39,77 @@ const Signup = () => {
       <h1 className="auth__title">Sign up</h1>
 
       <form onSubmit={handleSubmit} action="" noValidate>
-        <input
-          className="auth__input"
-          type="text"
-          name="name"
-          value={name}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Name"
-        />
+        <div className="auth__input">
+          <input
+            className="auth__input_box"
+            type="text"
+            name="name"
+            value={name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder="Name"
+          />
 
-        {errors.name && <AlertError error={errors.name} />}
+          <span>
+            <UsernameIcon />
+          </span>
+        </div>
 
-        <input
-          className="auth__input"
-          type="email"
-          name="email"
-          value={email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Email address"
-        />
+        <AlertError error={errors.name} />
 
-        {errors.email && <AlertError error={errors.email} />}
+        <div className="auth__input">
+          <input
+            className="auth__input_box"
+            type="email"
+            name="email"
+            value={email}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder="Email address"
+          />
 
-        <input
-          className="auth__input"
-          type="password"
-          name="password"
-          value={password}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Password"
-        />
+          <span>
+            <EmailIcon />
+          </span>
+        </div>
 
-        {errors.password && <AlertError error={errors.password} />}
+        <AlertError error={errors.email} />
 
-        <input
-          className="auth__input"
-          type="password"
-          name="confirmPassword"
-          value={confirmPassword}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Confirm Password"
-        />
+        <div className="auth__input">
+          <input
+            className="auth__input_box"
+            type="password"
+            name="password"
+            value={password}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder="Password"
+          />
 
-        {errors.confirmPassword && (
-          <AlertError error={errors.confirmPassword} />
-        )}
+          <span>
+            <PasswordIcon />
+          </span>
+        </div>
+
+        <AlertError error={errors.password} />
+
+        <div className="auth__input">
+          <input
+            className="auth__input_box"
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder="Confirm Password"
+          />
+
+          <span>
+            <PasswordIcon />
+          </span>
+        </div>
+
+        <AlertError error={errors.confirmPassword} />
 
         <button
           className="button button_primary"
@@ -96,10 +119,10 @@ const Signup = () => {
           Sign up
         </button>
 
-        {error && <AlertError error={error} />}
+        <AlertError error={error} />
 
         <div className="auth__social_networks">
-          <p>Sign up with social networks</p>
+          <p>or continue with these social profile</p>
 
           <div className="google-button">
             <div className="google-icon-wrapper">
@@ -114,9 +137,14 @@ const Signup = () => {
               <b>Sign in with google</b>
             </p>
           </div>
-        </div>
 
-        <Link to="/auth/login">Already signup?</Link>
+          <p className="auth__utils">
+            Already a member?{" "}
+            <span>
+              <Link to="/auth/login">Log in</Link>
+            </span>
+          </p>
+        </div>
       </form>
     </>
   );

@@ -19,13 +19,32 @@
   margin-bottom: 20px;
 }
 
-.auth__input {
-  color: $dark_grey;
-  border-bottom: 1px solid $light_grey;
-  margin: 1em 0;
-  width: 100%;
+.auth__form {
+  height: 320px;
+}
 
+.auth__input {
+  display: flex;
+  flex-direction: column;
+  height: 2em;
+  justify-content: center;
+  position: relative;
+
+  & svg {
+    left: 0;
+    position: absolute;
+    top: 0.1em;
+    fill: $grayishBlue;
+  }
+}
+
+.auth__input_box {
+  border-bottom: 1px solid $light_grey;
+  color: $dark_grey;
+  font-size: $sm;
+  padding-left: 2em;
   transition: all 0.3s ease;
+  width: 100%;
 
   &:focus {
     border-bottom: 1px solid $primary;
@@ -35,22 +54,40 @@
 .auth__social_networks {
   align-items: center;
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
+
+  & p {
+    font-size: $sm;
+    margin-bottom: 1em;
+  }
 }
 
 .auth__alert_error {
+  align-items: center;
   color: $danger;
   display: flex;
-  align-items: center;
-  font-size: $xs;
+
+  & p {
+    font-size: $xs;
+  }
 
   & svg {
     fill: $danger;
-    width: 18px;
     height: 18px;
-    margin-right: 5px;
+    margin: 0 0.25em;
+    width: 18px;
+  }
+}
+
+.auth__utils {
+  font-size: $sm;
+  margin: 1em 0;
+  text-align: center;
+
+  & a {
+    color: $primary;
+    font-weight: 600;
   }
 }

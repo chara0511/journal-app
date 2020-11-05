@@ -89,7 +89,6 @@ const updatedNote = (id, note) => ({
 
 export const fileUpload = (file) => async (dispatch, getState) => {
   const { active: activeNote } = getState().notes;
-  console.log(activeNote, file);
 
   const cloudinaryURL = "	https://api.cloudinary.com/v1_1/dfvra50ch/upload";
 
@@ -101,6 +100,7 @@ export const fileUpload = (file) => async (dispatch, getState) => {
     const response = await axios.post(cloudinaryURL, formData);
 
     activeNote.imageURL = response.data.secure_url;
+    activeNote.updated = new Date().getTime();
 
     dispatch(updateNote(activeNote.id, activeNote));
   } catch (error) {
