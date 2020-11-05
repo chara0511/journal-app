@@ -41,6 +41,30 @@
   }
 }
 
+.big_button_rounded {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  padding: 12px 0;
+  border-radius: 50%;
+  transition: $cubicTransition;
+
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.25);
+
+  & svg {
+    fill: $white;
+  }
+
+  &:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+  }
+}
+
 .google-button {
   cursor: pointer;
   margin: 5px auto;

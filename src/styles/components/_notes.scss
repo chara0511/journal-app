@@ -1,4 +1,5 @@
 .notes__container {
+  background-color: $lightGrayishBlue;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -13,20 +14,68 @@
   padding: 1em;
 }
 
-.notes__content {
+.notes__card {
+  background-color: $white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: $boxShadow-Notes;
   display: flex;
   flex-direction: column;
   margin: auto;
+  max-width: 420px;
+  position: relative;
+  transition: $cubicTransition;
+  width: 100%;
+
+  &:hover {
+    box-shadow: $boxShadow-Notes-hover;
+  }
+}
+
+.notes__card_content {
+  padding: 30px;
 }
 
 .notes__input_title,
 .notes__textarea_desc {
-  margin-bottom: 1em;
-  resize: none;
   background-color: $white;
+  color: $dark_grey;
+  line-height: 1.7em;
+  margin-bottom: 0.5em;
+  resize: none;
+  width: 100%;
 }
 
-.notes__image img {
-  height: 150px;
-  box-shadow: $boxShadow;
+.notes__input_title {
+  font-size: $xl;
+  font-weight: 700;
+}
+
+.notes__image {
+  position: relative;
+
+  & img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.notes__date {
+  position: absolute;
+  background-color: $primary;
+  top: 20px;
+  right: 20px;
+  border-radius: 100%;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  padding: 4px 0;
+  text-transform: uppercase;
+  color: $white;
+  font-weight: 500;
+
+  & span {
+    display: block;
+  }
 }

@@ -22,7 +22,6 @@ export const logIn = (email, password) => async (dispatch) => {
 
     dispatch(loggedIn(user.uid, user.displayName));
   } catch (error) {
-    console.log(error.message);
     dispatch(loginError(error.message));
   }
 };

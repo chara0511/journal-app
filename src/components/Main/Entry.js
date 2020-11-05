@@ -5,10 +5,6 @@ import { activeNote } from "../../actions/notes";
 
 const Entry = ({ body, date, id, title, imageURL, updated }) => {
   const dateFormatted = dayjs(date).format("ddd, DD MMM.");
-  const hourFormatted = dayjs(date).format("HH:mm:ss");
-
-  const dateUpdatedFormatted = dayjs(updated).format("ddd, DD MMM.");
-  const hourUpdatedFormatted = dayjs(updated).format("HH:mm:ss");
 
   const dispatch = useDispatch();
 
@@ -35,10 +31,7 @@ const Entry = ({ body, date, id, title, imageURL, updated }) => {
 
       <div className="main__entry_date">
         <p>
-          <span>{dateFormatted}</span> {hourFormatted}
-        </p>
-        <p>
-          {dateUpdatedFormatted}, {hourUpdatedFormatted}
+          <span>{dateFormatted}</span>
         </p>
       </div>
     </div>

@@ -8,7 +8,7 @@ const LoadingPage = () => {
         <CalendarIcon />
       </span>
 
-      <p>Journal App</p>
+      <p>My Journal</p>
     </div>
   );
 };
