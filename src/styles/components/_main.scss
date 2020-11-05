@@ -1,5 +1,6 @@
 .main__container {
   display: flex;
+  position: relative;
 
   & main {
     flex: 1;
@@ -26,11 +27,23 @@
   flex-direction: column;
   height: 100vh;
   padding: 1em;
-  max-width: 450px;
+  max-width: 375px;
   width: 100%;
+  position: fixed;
+  transition: $cubicTransition;
+  transform: translateX(-375px);
+  z-index: 99;
 
   & svg {
     fill: $white;
+  }
+
+  @include sm {
+    transform: translateX(0px);
+  }
+
+  @include md {
+    max-width: 450px;
   }
 }
 

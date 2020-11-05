@@ -1,4 +1,5 @@
 import AddIcon from "./AddIcon";
+import ArrowDown from "./ArrowDown";
 import CalendarIcon from "./CalendarIcon";
 import ClockIcon from "./ClockIcon";
 import EmailIcon from "./EmailIcon";
@@ -13,6 +14,7 @@ import UsernameIcon from "./UsernameIcon";
 
 export {
   AddIcon,
+  ArrowDown,
   CalendarIcon,
   ClockIcon,
   EmailIcon,

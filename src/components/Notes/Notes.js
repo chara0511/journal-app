@@ -9,7 +9,7 @@ import { MoreIcon } from "../../icons";
 const relativeTime = require("dayjs/plugin/relativeTime");
 // journal-app
 
-const Notes = () => {
+const Notes = ({ setOpenSidebar }) => {
   const { active: note } = useSelector((state) => state.notes);
 
   const initialState = {
@@ -73,7 +73,7 @@ const Notes = () => {
 
   return (
     <div className="notes__container">
-      <NotesBar />
+      <NotesBar setOpenSidebar={setOpenSidebar} />
 
       <div className="notes__card">
         {imageURL && (

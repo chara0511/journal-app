@@ -5,7 +5,7 @@ import { logOut } from "../../actions/auth";
 import { addNote } from "../../actions/notes";
 import { AddIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
 
-const SideBar = () => {
+const SideBar = ({ openSidebar, setOpenSidebar }) => {
   const dispatch = useDispatch();
 
   const { displayName } = useSelector((state) => state.auth);
@@ -18,14 +18,19 @@ const SideBar = () => {
     dispatch(logOut());
   };
 
+  const showSideBar = openSidebar && "translateX(0px)";
+
   return (
-    <aside className="main__sidebar">
+    <aside className="main__sidebar" style={{ transform: showSideBar }}>
       <div className="main__sidebar_navbar">
         <h3>
           Welcome, <span>{displayName}</span>
         </h3>
 
-        <button className="button_rounded">
+        <button
+          className="button_rounded"
+          onClick={() => setOpenSidebar((prev) => !prev)}
+        >
           <MenuOpenIcon />
         </button>
       </div>

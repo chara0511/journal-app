@@ -1,10 +1,24 @@
 .unselected__container {
-  align-self: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  @include sm {
+    margin-left: 375px;
+  }
+
+  @include md {
+    margin-left: 450px;
+  }
+}
+
+.unselected__content {
   background-color: $lightGrayishBlue;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+  flex: 1;
 
   & p {
     text-align: center;

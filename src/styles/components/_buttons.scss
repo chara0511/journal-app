@@ -39,6 +39,10 @@
       fill: $dark_grey;
     }
   }
+
+  @include sm {
+    visibility: hidden;
+  }
 }
 
 .big_button_rounded {

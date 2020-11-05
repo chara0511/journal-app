@@ -1,8 +1,8 @@
 @import "./base/theme";
 @import "./base/globalStyles";
+@import "./base/responsive-mixins";
 
 // Components
-
 @import "./components/auth";
 @import "./components/buttons";
 @import "./components/main";
