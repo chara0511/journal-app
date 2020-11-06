@@ -5,6 +5,7 @@ import {
   ADD_NOTE,
   DELETE_NOTE,
   LOADING_NOTES,
+  LOG_OUT_CLEANING,
   UPDATE_NOTE,
 } from "../types";
 
@@ -99,7 +100,7 @@ const updatedNote = (id, note) => ({
   payload: { id, ...note },
 });
 
-export const fileUpload = (file) => async (dispatch, getState) => {
+export const fileUpload = (file, note) => async (dispatch, getState) => {
   const { active: activeNote } = getState().notes;
 
   const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
@@ -110,7 +111,9 @@ export const fileUpload = (file) => async (dispatch, getState) => {
 
   try {
     const response = await axios.post(cloudinaryURL, formData);
-
+    console.log(getState().notes);
+    activeNote.title = note.title;
+    activeNote.body = note.body;
     activeNote.imageURL = response.data.secure_url;
     activeNote.updated = new Date().getTime();
 
@@ -155,4 +158,8 @@ export const deleteNote = (id) => async (dispatch, getState) => {
 const deletedNote = (id) => ({
   type: DELETE_NOTE,
   payload: id,
+});
+
+export const logOutCleaning = () => ({
+  type: LOG_OUT_CLEANING,
 });

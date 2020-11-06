@@ -16,6 +16,7 @@ import {
   ADD_NOTE,
   DELETE_NOTE,
   LOADING_NOTES,
+  LOG_OUT_CLEANING,
   UPDATE_NOTE,
 } from "../types";
 
@@ -58,6 +59,9 @@ export const notesReducer = (state = initialState, action) => {
         active: null,
         notes: state.notes.filter((note) => note.id !== action.payload),
       };
+
+    case LOG_OUT_CLEANING:
+      return initialState;
 
     default:
       return state;

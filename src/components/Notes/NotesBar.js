@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../../actions/auth";
+import { logOutCleaning } from "../../actions/notes";
 import {
   hideModal,
   handleSidebar,
@@ -31,6 +32,7 @@ const NotesBar = () => {
 
   const handleLogOut = () => {
     dispatch(logOut());
+    dispatch(logOutCleaning());
     dispatch(hideModal());
   };
 
