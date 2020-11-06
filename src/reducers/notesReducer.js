@@ -1,14 +1,14 @@
 /*
-{
-  notes: [],
-  active: {
-    uid: "GQBiB36N4ueuZgyxjj",
-    title: "",
-    body: "",
-    imageUrl: "",
-    date: new Date(),
+  {
+    notes: [],
+    active: {
+      uid: "GQBiB36N4ueuZgyxjj",
+      title: "",
+      body: "",
+      imageUrl: "",
+      date: new Date(),
+    }
   }
-}
 */
 
 import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";

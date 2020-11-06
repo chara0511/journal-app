@@ -2,6 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 import { activeNote } from "../../actions/notes";
+import { handleSidebar } from "../../actions/modals";
 
 const Entry = ({ body, date, id, title, imageURL, updated }) => {
   const dateFormatted = dayjs(date).format("ddd, DD MMM.");
@@ -11,6 +12,7 @@ const Entry = ({ body, date, id, title, imageURL, updated }) => {
   const handleActiveNote = () => {
     //dispatch(getNote(id));
     dispatch(activeNote(id, { body, date, id, imageURL, title, updated }));
+    dispatch(handleSidebar());
   };
 
   return (

@@ -19,11 +19,24 @@
   display: flex;
   color: $white;
   justify-content: space-between;
-  padding: 1em;
+  padding: 0.75em 1em;
+
+  @include xs {
+    padding: 1em 2em;
+  }
+
+  @include md {
+    padding: 1em 3em;
+  }
+
+  @include lg {
+    padding: 1em 4em;
+  }
 }
 
 .notes__bar_profile {
   display: inherit;
+  position: relative;
 
   & img {
     height: 25px;
@@ -32,11 +45,47 @@
     margin: 0 5px;
     border-radius: 50%;
   }
+}
 
-  & .notes__bar_profile_btn {
-    display: flex;
+.notes__bar_profile_btn {
+  align-items: center;
+  display: flex;
+  font-weight: 500;
+  margin: 0 5px;
+
+  & svg {
+    fill: $white;
+  }
+}
+
+.notes__bar_modal {
+  background-color: $lightGrayishBlue;
+  border: 1px solid $grayishBlue;
+  border-radius: 5px;
+  color: $dark_grey;
+  font-size: $sm;
+  padding: 0.75em;
+  position: absolute;
+  top: 2em;
+  width: 125px;
+
+  & ul li {
     align-items: center;
-    margin: 0 5px;
+    border-radius: 5px;
+    display: flex;
+    padding: 0.25em;
+
+    &:hover {
+      background-color: $light_grey;
+    }
+
+    & span {
+      margin-left: 0.5em;
+    }
+  }
+
+  & ul li:last-child {
+    color: $danger;
   }
 }
 

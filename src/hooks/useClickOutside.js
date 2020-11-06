@@ -1,10 +1,14 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { hideModal } from "../actions/modals";
 
 export const useClickOutside = (ref) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
-        console.log("click out");
+        dispatch(hideModal());
       }
     };
 
@@ -13,5 +17,7 @@ export const useClickOutside = (ref) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 };

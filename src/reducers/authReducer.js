@@ -1,9 +1,11 @@
 /*
+  {  
     auth: {
-        uid: "GQBiB36N4ueuZgyxjjaIAaEXpDg1",
-        displayName: "Chara-",
-        loading: false,
+      uid: "GQBiB36N4ueuZgyxjjaIAaEXpDg1",
+      displayName: "Chara-",
+      loading: false,
     }
+  }
 */
 
 import { ERROR, LOADING, LOG_IN, LOG_OUT } from "../types";

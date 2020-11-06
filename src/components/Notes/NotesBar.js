@@ -1,15 +1,28 @@
 import React from "react";
-import { ArrowDown, MenuIcon } from "../../icons";
+import { useDispatch } from "react-redux";
+import { hideModal, handleSidebar } from "../../actions/modals";
+import {
+  ArrowDown,
+  LogoutIcon,
+  MenuIcon,
+  NoteIcon,
+  ProfileIcon,
+} from "../../icons";
 
-const NotesBar = ({ setOpenSidebar }) => {
+const NotesBar = () => {
+  const dispatch = useDispatch();
+
+  const handleOpenSidebar = () => {
+    dispatch(handleSidebar());
+  };
+
   return (
     <div className="notes__bar">
-      <button
-        className="button_rounded"
-        onClick={() => setOpenSidebar((prev) => !prev)}
-      >
+      <button className="button_rounded" onClick={handleOpenSidebar}>
         <MenuIcon />
       </button>
+
+      <button onClick={() => dispatch(hideModal())}>hide</button>
 
       <div className="notes__bar_profile">
         <img
@@ -22,6 +35,27 @@ const NotesBar = ({ setOpenSidebar }) => {
 
           <ArrowDown />
         </button>
+
+        <div className="notes__bar_modal">
+          <ul>
+            <li>
+              <ProfileIcon />
+              <span>My Profile</span>
+            </li>
+
+            <li>
+              <NoteIcon />
+              <span>My Notes</span>
+            </li>
+
+            <hr />
+
+            <li>
+              <LogoutIcon />
+              <span>Log out</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
