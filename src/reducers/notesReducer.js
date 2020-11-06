@@ -11,11 +11,17 @@
   }
 */
 
-import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";
+import {
+  ACTIVE_NOTE,
+  ADD_NOTE,
+  DELETE_NOTE,
+  LOADING_NOTES,
+  UPDATE_NOTE,
+} from "../types";
 
 const initialState = {
-  notes: [],
   active: null,
+  notes: [],
 };
 
 export const notesReducer = (state = initialState, action) => {
@@ -24,6 +30,12 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         active: { ...action.payload },
+      };
+
+    case ADD_NOTE:
+      return {
+        ...state,
+        notes: [action.payload, ...state.notes],
       };
 
     case LOADING_NOTES:
@@ -38,6 +50,13 @@ export const notesReducer = (state = initialState, action) => {
         notes: state.notes.map((note) =>
           note.id === action.payload.id ? action.payload : note
         ),
+      };
+
+    case DELETE_NOTE:
+      return {
+        ...state,
+        active: null,
+        notes: state.notes.filter((note) => note.id !== action.payload),
       };
 
     default:

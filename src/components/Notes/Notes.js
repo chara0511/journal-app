@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNote, fileUpload } from "../../actions/notes";
+import { updateNote, fileUpload, deleteNote } from "../../actions/notes";
+import { hideModal } from "../../actions/modals";
 import NotesBar from "./NotesBar";
 import { MoreIcon } from "../../icons";
-import { hideModal } from "../../actions/modals";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 // journal-app
 
-const Notes = ({ setOpenSidebar }) => {
+const Notes = () => {
   const { active: note } = useSelector((state) => state.notes);
 
   const initialState = {
     body: note.body,
     date: note.date,
+    id: note.id,
     imageURL: note.imageURL,
     title: note.title,
     updated: note.updated,
@@ -35,15 +36,18 @@ const Notes = ({ setOpenSidebar }) => {
   const handleUpdateNote = (updatedNote) =>
     dispatch(updateNote(note.id, updatedNote));
 
-  const handleChange = ({ target }) => {
+  const handleDeleteNote = () => dispatch(deleteNote(note.id));
+
+  const handleChangeText = ({ target }) => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
   };
 
-  const handleFile = (e) => {
+  const handleChangeFile = (e) => {
     const file = e.target.files[0];
 
     if (file) {
-      dispatch(fileUpload(file));
+      // test noteForm
+      dispatch(fileUpload(file, noteForm));
     }
   };
 
@@ -60,7 +64,7 @@ const Notes = ({ setOpenSidebar }) => {
 
   return (
     <div className="notes__container">
-      <NotesBar setOpenSidebar={setOpenSidebar} />
+      <NotesBar />
 
       <div onClick={() => dispatch(hideModal())} className="notes__content">
         <div className="notes__card">
@@ -84,7 +88,7 @@ const Notes = ({ setOpenSidebar }) => {
               type="text"
               name="title"
               value={title}
-              onChange={handleChange}
+              onChange={handleChangeText}
               className="notes__input_title"
               placeholder="Add amazing title"
             />
@@ -95,7 +99,7 @@ const Notes = ({ setOpenSidebar }) => {
               rows="4"
               name="body"
               value={body}
-              onChange={handleChange}
+              onChange={handleChangeText}
               className="notes__textarea_desc"
               placeholder="What happened today?"
             />
@@ -104,7 +108,7 @@ const Notes = ({ setOpenSidebar }) => {
               id="file"
               name="file"
               type="file"
-              onChange={handleFile}
+              onChange={handleChangeFile}
               style={{ display: "none" }}
             />
 
@@ -125,6 +129,8 @@ const Notes = ({ setOpenSidebar }) => {
             >
               Save changes
             </button>
+
+            <button onClick={handleDeleteNote}>Delete note</button>
           </div>
         </div>
       </div>

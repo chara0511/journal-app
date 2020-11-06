@@ -1,10 +1,21 @@
 import axios from "axios";
 import { db } from "../firebase/firebasConfig";
-import { ACTIVE_NOTE, LOADING_NOTES, UPDATE_NOTE } from "../types";
+import {
+  ACTIVE_NOTE,
+  ADD_NOTE,
+  DELETE_NOTE,
+  LOADING_NOTES,
+  UPDATE_NOTE,
+} from "../types";
 
 export const activeNote = (id, note) => ({
   type: ACTIVE_NOTE,
   payload: { id, ...note },
+});
+
+const addedNote = (id, newNote) => ({
+  type: ADD_NOTE,
+  payload: { id, ...newNote },
 });
 
 export const addNote = () => async (dispatch, getState) => {
@@ -24,6 +35,7 @@ export const addNote = () => async (dispatch, getState) => {
       .add(newNote);
 
     dispatch(activeNote(docReference.id, newNote));
+    dispatch(addedNote(docReference.id, newNote));
   } catch (error) {
     console.log(error);
   }
@@ -90,7 +102,7 @@ const updatedNote = (id, note) => ({
 export const fileUpload = (file) => async (dispatch, getState) => {
   const { active: activeNote } = getState().notes;
 
-  const cloudinaryURL = "	https://api.cloudinary.com/v1_1/dfvra50ch/upload";
+  const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
 
   const formData = new FormData();
   formData.append("upload_preset", "journal-app");
@@ -107,3 +119,40 @@ export const fileUpload = (file) => async (dispatch, getState) => {
     console.log(error);
   }
 };
+
+// export const fileUpload = (file, note) => async (dispatch) => {
+//   const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
+
+//   const formData = new FormData();
+//   formData.append("upload_preset", "journal-app");
+//   formData.append("file", file);
+//   console.log(file);
+
+//   try {
+//     const response = await axios.post(cloudinaryURL, formData);
+
+//     note.imageURL = response.data.secure_url;
+//     note.updated = new Date().getTime();
+
+//     dispatch(updateNote(note.id, note));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const deleteNote = (id) => async (dispatch, getState) => {
+  try {
+    const { uid } = getState().auth;
+
+    await db.collection(`${uid}/journal/notes`).doc(id).delete();
+
+    dispatch(deletedNote(id));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deletedNote = (id) => ({
+  type: DELETE_NOTE,
+  payload: id,
+});

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const ArrowDown = () => {
   const { profile } = useSelector((state) => state.modals);
 
-  const rotate = profile && "rotate(180deg)";
+  const rotate = profile ? "rotate(180deg)" : "rotate(0deg)";
 
   return (
     <svg
