@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-import Entries from "./Entries";
-import { logOut } from "../../actions/auth";
 import { addNote } from "../../actions/notes";
-import { AddIcon, LogoutIcon, MenuOpenIcon } from "../../icons";
+import { AddIcon, MenuOpenIcon } from "../../icons";
 import { handleSidebar } from "../../actions/modals";
+import Entries from "./Entries";
 
 const SideBar = () => {
+  const [currentDate, setCurrentDate] = useState(new Date().getTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentDate(new Date().getTime());
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const dispatch = useDispatch();
 
   const { displayName } = useSelector((state) => state.auth);
@@ -17,15 +29,14 @@ const SideBar = () => {
     handleOpenSidebar();
   };
 
-  const handleLogOut = () => {
-    dispatch(logOut());
-  };
-
   const handleOpenSidebar = () => {
     dispatch(handleSidebar());
   };
 
   const openSidebar = sidebar && "translateX(0px)";
+
+  const clockFormatted = dayjs(currentDate).format("ddd, DD MMM.");
+  const clock2Formatted = dayjs(currentDate).format("HH:mm:ss");
 
   return (
     <aside className="main__sidebar" style={{ transform: openSidebar }}>
@@ -47,9 +58,11 @@ const SideBar = () => {
 
       <Entries />
 
-      <button className="main__logout" onClick={handleLogOut}>
-        <span>Log out</span> <LogoutIcon />
-      </button>
+      <div className="main__clock">
+        <span>
+          {clockFormatted} - {clock2Formatted}
+        </span>
+      </div>
     </aside>
   );
 };

@@ -8,11 +8,11 @@
   }
 */
 
-import { HIDE_MODAL, HANDLE_SIDEBAR } from "../types";
+import { HIDE_MODAL, HANDLE_SIDEBAR, SHOW_PROFILE_MODAL } from "../types";
 
 const initialState = {
   card: null,
-  navbar: null,
+  profile: null,
   sidebar: null,
 };
 
@@ -22,6 +22,12 @@ export const modalsReducer = (state = initialState, action) => {
       return {
         ...state,
         sidebar: !state.sidebar,
+      };
+
+    case SHOW_PROFILE_MODAL:
+      return {
+        ...state,
+        profile: !state.profile,
       };
 
     case HIDE_MODAL:

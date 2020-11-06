@@ -22,6 +22,7 @@ export const authReducer = (state = {}, action) => {
         uid: action.payload.uid,
         displayName: action.payload.displayName,
         loading: false,
+        photoURL: action.payload.photoURL,
       };
 
     case ERROR:

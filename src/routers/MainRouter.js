@@ -20,7 +20,8 @@ const MainRouter = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
-        dispatch(loggedIn(user.uid, user.displayName));
+        console.log(user);
+        dispatch(loggedIn(user.uid, user.displayName, user.photoURL));
 
         dispatch(loadingNotes(user.uid));
 

@@ -55,6 +55,7 @@
 
   & svg {
     fill: $white;
+    transition: $cubicTransition;
   }
 }
 
@@ -69,11 +70,13 @@
   top: 2em;
   width: 125px;
 
-  & ul li {
+  & ul li a,
+  & ul li button {
     align-items: center;
     border-radius: 5px;
     display: flex;
     padding: 0.25em;
+    width: 102px;
 
     &:hover {
       background-color: $light_grey;
@@ -84,9 +87,15 @@
     }
   }
 
-  & ul li:last-child {
+  & ul li button {
     color: $danger;
   }
+}
+
+.notes__content {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .notes__card {
@@ -94,8 +103,6 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: $boxShadow-Notes;
-  display: flex;
-  flex-direction: column;
   margin: auto;
   max-width: 420px;
   position: relative;

@@ -1,6 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { hideModal, handleSidebar } from "../../actions/modals";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { logOut } from "../../actions/auth";
+import {
+  hideModal,
+  handleSidebar,
+  showProfileModal,
+} from "../../actions/modals";
 import {
   ArrowDown,
   LogoutIcon,
@@ -12,8 +18,20 @@ import {
 const NotesBar = () => {
   const dispatch = useDispatch();
 
+  const { profile } = useSelector((state) => state.modals);
+  const { displayName, photoURL } = useSelector((state) => state.auth);
+
   const handleOpenSidebar = () => {
     dispatch(handleSidebar());
+  };
+
+  const handleShowProfileModal = () => {
+    dispatch(showProfileModal());
+  };
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+    dispatch(hideModal());
   };
 
   return (
@@ -22,40 +40,46 @@ const NotesBar = () => {
         <MenuIcon />
       </button>
 
-      <button onClick={() => dispatch(hideModal())}>hide</button>
-
       <div className="notes__bar_profile">
-        <img
-          src="https://res.cloudinary.com/dfvra50ch/image/upload/v1604555177/o0w9yb5kdsmtfse3fzle.jpg"
-          alt="profile"
-        />
+        <img src={photoURL} alt="profile" />
 
-        <button className="notes__bar_profile_btn">
-          <span>Chara- </span>
+        <button
+          className="notes__bar_profile_btn"
+          onClick={handleShowProfileModal}
+        >
+          <span>{displayName}</span>
 
           <ArrowDown />
         </button>
 
-        <div className="notes__bar_modal">
-          <ul>
-            <li>
-              <ProfileIcon />
-              <span>My Profile</span>
-            </li>
+        {profile && (
+          <div className="notes__bar_modal">
+            <ul>
+              <li>
+                <Link to="/">
+                  <ProfileIcon />
+                  <span>My Profile</span>
+                </Link>
+              </li>
 
-            <li>
-              <NoteIcon />
-              <span>My Notes</span>
-            </li>
+              <li>
+                <Link to="/">
+                  <NoteIcon />
+                  <span>My Notes</span>
+                </Link>
+              </li>
 
-            <hr />
+              <hr />
 
-            <li>
-              <LogoutIcon />
-              <span>Log out</span>
-            </li>
-          </ul>
-        </div>
+              <li>
+                <button onClick={handleLogOut}>
+                  <LogoutIcon />
+                  <span>Log out</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

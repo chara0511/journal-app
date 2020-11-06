@@ -1,14 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { hideModal } from "../../actions/modals";
 import { TouchIcon } from "../../icons";
 import NotesBar from "../Notes/NotesBar";
 
-const Unselected = ({ setOpenSidebar }) => {
+const Unselected = () => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="unselected__container">
-        <NotesBar setOpenSidebar={setOpenSidebar} />
+        <NotesBar />
 
-        <div className="unselected__content">
+        <div
+          className="unselected__content"
+          onClick={() => dispatch(hideModal())}
+        >
           <p>
             Select something <br /> or <br /> Create a new note.
           </p>
