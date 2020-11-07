@@ -1,0 +1,59 @@
+// https://reactcommunity.org/react-transition-group/css-transition
+
+.fadeup-enter {
+  opacity: 0.01;
+  transform: translateY(20px);
+  transition: opacity 300ms $easing, transform 300ms $easing;
+}
+
+.fadeup-enter-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 300ms $easing, transform 300ms $easing;
+}
+
+.fadedown-enter {
+  opacity: 0.01;
+  transform: translateY(-20px);
+  transition: opacity 300ms $easing, transform 300ms $easing;
+}
+
+.fadedown-enter-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 300ms $easing, transform 300ms $easing;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  transition: opacity 1000ms $easing;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms $easing;
+}
+
+// .fade-exit {
+//   opacity: 0;
+// }
+// .fade-exit-active {
+//   opacity: 0;
+//   transform: scale(0.9);
+//   transition: opacity 300ms, transform 300ms;
+// }
+
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}

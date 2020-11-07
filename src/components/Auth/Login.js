@@ -10,11 +10,11 @@ import { validateLogIn } from "../../validations";
 const Login = () => {
   const initialState = { email: "", password: "" };
 
+  const dispatch = useDispatch();
+
   const successLogIn = () => {
     dispatch(logIn(email, password));
   };
-
-  const dispatch = useDispatch();
 
   const ref = useRef(null);
 
