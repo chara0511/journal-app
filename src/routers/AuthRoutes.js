@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Login from "../components/Auth/Login";
@@ -15,10 +15,18 @@ const AuthRoutes = () => {
     return () => setInProp(false);
   }, []);
 
+  const nodeRef = useRef(null);
+
   return (
     <div className="auth__main">
-      <CSSTransition mountOnEnter in={inProp} timeout={500} classNames="fade">
-        <div className="auth__container">
+      <CSSTransition
+        mountOnEnter
+        in={inProp}
+        timeout={500}
+        classNames="fade"
+        nodeRef={nodeRef}
+      >
+        <div className="auth__container" ref={nodeRef}>
           <Switch>
             <Route exact path="/auth/login" component={Login} />
             <Route exact path="/auth/signup" component={Signup} />

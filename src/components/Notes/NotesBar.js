@@ -58,7 +58,7 @@ const NotesBar = () => {
           <div className="notes__modal">
             <ul>
               <li>
-                <Link to="/">
+                <Link to="/profile">
                   <ProfileIcon />
                   <span>My Profile</span>
                 </Link>
