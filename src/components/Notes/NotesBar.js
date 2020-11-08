@@ -55,7 +55,7 @@ const NotesBar = () => {
         </button>
 
         {profile && (
-          <div className="notes__bar_modal">
+          <div className="notes__modal">
             <ul>
               <li>
                 <Link to="/">

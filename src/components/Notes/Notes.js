@@ -79,9 +79,17 @@ const Notes = () => {
             <span>{monthFormatted}</span>
           </div>
 
-          <button className="big_button_rounded">
-            <MoreIcon />
-          </button>
+          <div className="notes__modal">
+            <button className="big_button_rounded">
+              <MoreIcon />
+            </button>
+
+            <ul>
+              <li>
+                <button onClick={handleDeleteNote}>Delete note</button>
+              </li>
+            </ul>
+          </div>
 
           <div className="notes__card_content">
             <input
@@ -114,7 +122,7 @@ const Notes = () => {
 
             <button onClick={handleChooseFile}>Choose a file</button>
 
-            <span>{lastUpdated}</span>
+            {updated ? <span>{lastUpdated}</span> : <span>"-"</span>}
 
             <button
               onClick={() =>
@@ -129,8 +137,6 @@ const Notes = () => {
             >
               Save changes
             </button>
-
-            <button onClick={handleDeleteNote}>Delete note</button>
           </div>
         </div>
       </div>

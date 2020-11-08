@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Entry from "./Entry";
 
 const Entries = () => {
   const { notes } = useSelector((state) => state.notes);
 
+  const nodeRef = useRef(null);
+
   return (
     <div className="main__entries scrollY">
-      {notes.map((note) => (
-        <Entry key={note.id} {...note} />
-      ))}
+      <TransitionGroup>
+        {notes.map((note) => (
+          <CSSTransition
+            key={note.id}
+            nodeRef={nodeRef}
+            mountOnEnter
+            timeout={500}
+            classNames="fadedown"
+          >
+            <Entry {...note} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
   );
 };

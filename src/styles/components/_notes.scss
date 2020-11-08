@@ -59,7 +59,7 @@
   }
 }
 
-.notes__bar_modal {
+.notes__modal {
   background-color: $lightGrayishBlue;
   border: 1px solid $grayishBlue;
   border-radius: 5px;
@@ -117,6 +117,7 @@
 
 .notes__card_content {
   padding: 30px;
+  user-select: none;
 }
 
 .notes__input_title,
