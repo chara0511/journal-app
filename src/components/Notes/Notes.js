@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateNote, fileUpload, deleteNote } from "../../actions/notes";
 import { hideModal } from "../../actions/modals";
 import NotesBar from "./NotesBar";
-import { MoreIcon } from "../../icons";
+import { DeleteIcon, MoreIcon } from "../../icons";
+import DragAndDrop from "./DragAndDrop";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 // journal-app
@@ -46,7 +47,6 @@ const Notes = () => {
     const file = e.target.files[0];
 
     if (file) {
-      // test noteForm
       dispatch(fileUpload(file, noteForm));
     }
   };
@@ -68,10 +68,12 @@ const Notes = () => {
 
       <div onClick={() => dispatch(hideModal())} className="notes__content">
         <div className="notes__card">
-          {imageURL && (
+          {imageURL ? (
             <div className="notes__image">
               <img src={imageURL} alt={title} />
             </div>
+          ) : (
+            <DragAndDrop />
           )}
 
           <div className="notes__date">
@@ -79,14 +81,17 @@ const Notes = () => {
             <span>{monthFormatted}</span>
           </div>
 
-          <div className="notes__modal">
-            <button className="big_button_rounded">
-              <MoreIcon />
-            </button>
+          <button className="big_button_rounded">
+            <MoreIcon />
+          </button>
 
+          <div className="notes__modal_card">
             <ul>
               <li>
-                <button onClick={handleDeleteNote}>Delete note</button>
+                <button onClick={handleDeleteNote}>
+                  <DeleteIcon />
+                  <span>Delete</span>
+                </button>
               </li>
             </ul>
           </div>
@@ -104,11 +109,11 @@ const Notes = () => {
             <textarea
               id=""
               cols="30"
-              rows="4"
+              rows="3"
               name="body"
               value={body}
               onChange={handleChangeText}
-              className="notes__textarea_desc"
+              className="notes__textarea_desc scrollY"
               placeholder="What happened today?"
             />
 

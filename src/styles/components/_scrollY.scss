@@ -2,6 +2,7 @@
   overflow: auto;
   scrollbar-color: lighten($color: $dark_grey, $amount: 35) $light_grey;
   scrollbar-width: thin;
+  width: 100%;
 
   &::-webkit-scrollbar {
     width: 8px;
