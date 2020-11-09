@@ -17,3 +17,5 @@ export const HANDLE_SIDEBAR = "HANDLE_SIDEBAR";
 export const SHOW_PROFILE_MODAL = "SHOW_PROFILE_MODAL";
 export const SHOW_CARD_MODAL = "SHOW_CARD_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
+
+export const ADD_DROP_ZONE = "ADD_DROP_ZONE";

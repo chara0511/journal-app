@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateNote, fileUpload, deleteNote } from "../../actions/notes";
 import { hideModal } from "../../actions/modals";
 import NotesBar from "./NotesBar";
-import { DeleteIcon, MoreIcon } from "../../icons";
+import { DeleteIcon, MoreIcon, NewImageIcon } from "../../icons";
 import DragAndDrop from "./DragAndDrop";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -73,7 +73,7 @@ const Notes = () => {
               <img src={imageURL} alt={title} />
             </div>
           ) : (
-            <DragAndDrop />
+            <DragAndDrop {...noteForm} />
           )}
 
           <div className="notes__date">
@@ -88,9 +88,16 @@ const Notes = () => {
           <div className="notes__modal_card">
             <ul>
               <li>
+                <button onClick={handleChooseFile}>
+                  <NewImageIcon />
+                  <span>New image</span>
+                </button>
+              </li>
+
+              <li>
                 <button onClick={handleDeleteNote}>
                   <DeleteIcon />
-                  <span>Delete</span>
+                  <span>Delete note</span>
                 </button>
               </li>
             </ul>
@@ -124,8 +131,6 @@ const Notes = () => {
               onChange={handleChangeFile}
               style={{ display: "none" }}
             />
-
-            <button onClick={handleChooseFile}>Choose a file</button>
 
             {updated ? <span>{lastUpdated}</span> : <span>"-"</span>}
 

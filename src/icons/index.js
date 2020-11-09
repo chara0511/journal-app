@@ -9,6 +9,7 @@ import LogoutIcon from "./LogoutIcon";
 import MenuIcon from "./MenuIcon";
 import MenuOpenIcon from "./MenuOpenIcon";
 import MoreIcon from "./MoreIcon";
+import NewImageIcon from "./NewImageIcon";
 import NoteIcon from "./NoteIcon";
 import PasswordIcon from "./PasswordIcon";
 import ProfileIcon from "./ProfileIcon";
@@ -28,6 +29,7 @@ export {
   MenuOpenIcon,
   MoreIcon,
   NoteIcon,
+  NewImageIcon,
   PasswordIcon,
   ProfileIcon,
   TouchIcon,
