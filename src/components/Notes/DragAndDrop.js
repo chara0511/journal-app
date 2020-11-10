@@ -5,6 +5,7 @@ import { fileUpload } from "../../actions/notes";
 import Landscape from "../../images/Landscape";
 
 const DragAndDrop = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
 
   const handleDragEnter = (e) => {
@@ -44,7 +45,7 @@ const DragAndDrop = (props) => {
 
       <p>or</p>
 
-      <button>Choose a file</button>
+      <button onClick={props.handleChooseFile}>Choose a file</button>
     </div>
   );
 };

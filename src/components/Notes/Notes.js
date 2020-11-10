@@ -69,39 +69,41 @@ const Notes = () => {
       <div onClick={() => dispatch(hideModal())} className="notes__content">
         <div className="notes__card">
           {imageURL ? (
-            <div className="notes__image">
-              <img src={imageURL} alt={title} />
-            </div>
+            <>
+              <div className="notes__image">
+                <img src={imageURL} alt={title} />
+              </div>
+
+              <div className="notes__date">
+                <span>{dayFormatted}</span>
+                <span>{monthFormatted}</span>
+              </div>
+
+              <button className="big_button_rounded">
+                <MoreIcon />
+              </button>
+
+              <div className="notes__modal_card">
+                <ul>
+                  <li>
+                    <button onClick={handleChooseFile}>
+                      <NewImageIcon />
+                      <span>New image</span>
+                    </button>
+                  </li>
+
+                  <li>
+                    <button onClick={handleDeleteNote}>
+                      <DeleteIcon />
+                      <span>Delete note</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </>
           ) : (
-            <DragAndDrop {...noteForm} />
+            <DragAndDrop {...noteForm} handleChooseFile={handleChooseFile} />
           )}
-
-          <div className="notes__date">
-            <span>{dayFormatted}</span>
-            <span>{monthFormatted}</span>
-          </div>
-
-          <button className="big_button_rounded">
-            <MoreIcon />
-          </button>
-
-          <div className="notes__modal_card">
-            <ul>
-              <li>
-                <button onClick={handleChooseFile}>
-                  <NewImageIcon />
-                  <span>New image</span>
-                </button>
-              </li>
-
-              <li>
-                <button onClick={handleDeleteNote}>
-                  <DeleteIcon />
-                  <span>Delete note</span>
-                </button>
-              </li>
-            </ul>
-          </div>
 
           <div className="notes__card_content">
             <input
@@ -132,21 +134,27 @@ const Notes = () => {
               style={{ display: "none" }}
             />
 
-            {updated ? <span>{lastUpdated}</span> : <span>"-"</span>}
+            <div className="notes__card_footer">
+              {updated ? (
+                <span>Updated {lastUpdated}</span>
+              ) : (
+                <span>Updating</span>
+              )}
 
-            <button
-              onClick={() =>
-                handleUpdateNote({
-                  body,
-                  date,
-                  imageURL,
-                  title,
-                  updated: new Date().getTime(),
-                })
-              }
-            >
-              Save changes
-            </button>
+              <button
+                onClick={() =>
+                  handleUpdateNote({
+                    body,
+                    date,
+                    imageURL,
+                    title,
+                    updated: new Date().getTime(),
+                  })
+                }
+              >
+                Save changes
+              </button>
+            </div>
           </div>
         </div>
       </div>
