@@ -111,7 +111,7 @@
   align-items: center;
   justify-content: space-evenly;
 
-  & h2 {
+  & h1 {
     font-size: $lg;
   }
 
@@ -137,10 +137,8 @@
 }
 
 .notes__dragndrop_image {
-  & svg {
-    width: 150px;
-    border-radius: 5px;
-  }
+  border-radius: 5px;
+  width: 150px;
 }
 
 .notes__card {
@@ -166,10 +164,12 @@
 
 .notes__input_title,
 .notes__textarea_desc {
-  background-color: $white;
+  background-color: $lightGrayishBlue;
+  border-radius: 5px;
   color: $dark_grey;
   line-height: 1.7em;
   margin-bottom: 0.5em;
+  padding: 0 0.25em;
   resize: none;
   width: 100%;
 }
@@ -190,18 +190,19 @@
 }
 
 .notes__date {
-  position: absolute;
-  background-color: $primary;
-  top: 20px;
-  right: 20px;
+  background-color: $mediumaquamarine;
   border-radius: 100%;
-  text-align: center;
-  width: 50px;
-  height: 50px;
-  padding: 4px 0;
-  text-transform: uppercase;
+  box-shadow: $boxShadow;
   color: $white;
   font-weight: 500;
+  height: 50px;
+  padding: 4px 0;
+  position: absolute;
+  right: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  top: 20px;
+  width: 50px;
 
   & span {
     display: block;
@@ -209,6 +210,12 @@
 }
 
 .notes__card_footer {
+  align-items: center;
   display: flex;
   justify-content: space-between;
+
+  & span {
+    color: $grayishBlue;
+    font-size: $sm;
+  }
 }

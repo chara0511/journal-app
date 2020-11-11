@@ -15,6 +15,7 @@ import {
   ACTIVE_NOTE,
   ADD_NOTE,
   DELETE_NOTE,
+  FILE_UPLOADING,
   LOADING_NOTES,
   LOG_OUT_CLEANING,
   UPDATE_NOTE,
@@ -45,9 +46,16 @@ export const notesReducer = (state = initialState, action) => {
         notes: [...action.payload],
       };
 
+    case FILE_UPLOADING:
+      return {
+        ...state,
+        active: { ...state.active, loading: true },
+      };
+
     case UPDATE_NOTE:
       return {
         ...state,
+        active: { ...state.active, loading: false },
         notes: state.notes.map((note) =>
           note.id === action.payload.id ? action.payload : note
         ),

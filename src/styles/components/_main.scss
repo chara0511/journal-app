@@ -92,6 +92,8 @@
   color: $dark-grey;
   display: flex;
   margin: 0 3px 10px 2px;
+  min-height: 30px;
+  position: relative;
   overflow: hidden;
   cursor: pointer;
   transition: $normalTransition;
@@ -122,14 +124,18 @@
 }
 
 .main__entry_date {
+  bottom: 0;
+  color: $grayishBlue;
   display: flex;
   flex-direction: column;
   font-size: $sm;
   justify-content: center;
   padding: 8px;
+  position: absolute;
+  right: 0;
   text-align: center;
 
   & span {
-    font-weight: 700;
+    font-weight: 500;
   }
 }

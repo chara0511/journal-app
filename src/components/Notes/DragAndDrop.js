@@ -1,12 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dragEnter, dragOver } from "../../actions/dragndrop";
 import { fileUpload } from "../../actions/notes";
 import Landscape from "../../images/Landscape";
+import ProgressBar from "../Main/ProgressBar";
 
 const DragAndDrop = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.notes.active);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const DragAndDrop = (props) => {
 
   return (
     <div className="notes__dragndrop">
-      <h2>Upload your image</h2>
+      <h1>Upload your image</h1>
 
       <div
         className="notes__dragndrop_zone"
@@ -37,7 +39,7 @@ const DragAndDrop = (props) => {
         <p>File should be Jpeg, Png ...</p>
 
         <div className="notes__dragndrop_image">
-          <Landscape />
+          {loading ? <ProgressBar /> : <Landscape />}
         </div>
 
         <p>Drag {"&"} Drop your image here </p>
@@ -45,7 +47,9 @@ const DragAndDrop = (props) => {
 
       <p>or</p>
 
-      <button onClick={props.handleChooseFile}>Choose a file</button>
+      <button className="button_secondary_sm" onClick={props.handleChooseFile}>
+        Choose a file
+      </button>
     </div>
   );
 };

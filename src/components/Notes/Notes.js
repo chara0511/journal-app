@@ -142,6 +142,7 @@ const Notes = () => {
               )}
 
               <button
+                className="button_primary_sm"
                 onClick={() =>
                   handleUpdateNote({
                     body,

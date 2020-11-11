@@ -4,6 +4,25 @@
   width: 100%;
 }
 
+.button_primary_sm,
+.button_secondary_sm {
+  background-color: $primary;
+  border-radius: 3px;
+  color: $white;
+  padding: 0.25em 0.5em;
+  transition: $cubicTransition;
+  box-shadow: $boxShadow;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lighten($color: $primary, $amount: 15);
+  }
+}
+
+.button_secondary_sm {
+  background-color: $mediumturquoise;
+}
+
 .button_primary {
   background-color: $primary;
   border-radius: 3px;
@@ -54,8 +73,8 @@
   padding: 12px 0;
   border-radius: 50%;
   transition: $cubicTransition;
-
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.25);
+  background-color: $mediumaquamarine;
+  box-shadow: $boxShadow;
 
   & svg {
     fill: $white;

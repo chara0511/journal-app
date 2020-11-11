@@ -21,7 +21,6 @@ const SideBar = () => {
 
   const dispatch = useDispatch();
 
-  const { displayName } = useSelector((state) => state.auth);
   const { sidebar } = useSelector((state) => state.modals);
 
   const handleNewNote = () => {
@@ -36,14 +35,11 @@ const SideBar = () => {
   const openSidebar = sidebar && "translateX(0px)";
 
   const clockFormatted = dayjs(currentDate).format("ddd, DD MMM.");
-  const clock2Formatted = dayjs(currentDate).format("HH:mm:ss");
 
   return (
     <aside className="main__sidebar" style={{ transform: openSidebar }}>
       <div className="main__sidebar_navbar">
-        <h3>
-          Welcome, <span>{displayName}</span>
-        </h3>
+        <h3>My notes</h3>
 
         <button className="button_rounded" onClick={handleOpenSidebar}>
           <MenuOpenIcon />
@@ -59,9 +55,7 @@ const SideBar = () => {
       <Entries />
 
       <div className="main__clock">
-        <span>
-          {clockFormatted} - {clock2Formatted}
-        </span>
+        <span>{clockFormatted}</span>
       </div>
     </aside>
   );

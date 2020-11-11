@@ -4,6 +4,7 @@ import {
   ACTIVE_NOTE,
   ADD_NOTE,
   DELETE_NOTE,
+  FILE_UPLOADING,
   LOADING_NOTES,
   LOG_OUT_CLEANING,
   UPDATE_NOTE,
@@ -27,6 +28,7 @@ export const addNote = () => async (dispatch, getState) => {
       body: "",
       date: new Date().getTime(),
       imageURL: null,
+      loading: null,
       title: "",
       updated: null,
     };
@@ -101,6 +103,8 @@ const updatedNote = (id, note) => ({
 });
 
 export const fileUpload = (file, note) => async (dispatch, getState) => {
+  dispatch(fileUploading());
+
   const { active: activeNote } = getState().notes;
 
   const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
@@ -122,6 +126,10 @@ export const fileUpload = (file, note) => async (dispatch, getState) => {
     console.log(error);
   }
 };
+
+const fileUploading = () => ({
+  type: FILE_UPLOADING,
+});
 
 // export const fileUpload = (file, note) => async (dispatch) => {
 //   const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
