@@ -8,7 +8,12 @@
   }
 */
 
-import { HIDE_MODAL, HANDLE_SIDEBAR, SHOW_PROFILE_MODAL } from "../types";
+import {
+  HIDE_MODAL,
+  HANDLE_SIDEBAR,
+  SHOW_PROFILE_MODAL,
+  SHOW_CARD_MODAL,
+} from "../types";
 
 const initialState = {
   card: null,
@@ -32,6 +37,12 @@ export const modalsReducer = (state = initialState, action) => {
 
     case HIDE_MODAL:
       return initialState;
+
+    case SHOW_CARD_MODAL:
+      return {
+        ...state,
+        card: !state.card,
+      };
 
     default:
       return state;

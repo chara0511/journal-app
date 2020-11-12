@@ -57,14 +57,14 @@ const NotesBar = () => {
         {profile && (
           <div className="notes__modal">
             <ul>
-              <li>
+              <li onClick={handleShowProfileModal}>
                 <Link to="/profile">
                   <ProfileIcon />
                   <span>My Profile</span>
                 </Link>
               </li>
 
-              <li>
+              <li onClick={handleShowProfileModal}>
                 <Link to="/">
                   <NoteIcon />
                   <span>My Notes</span>

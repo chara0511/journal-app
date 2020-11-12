@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { updateNote, fileUpload, deleteNote } from "../../actions/notes";
-import { hideModal } from "../../actions/modals";
+import { showCardModal } from "../../actions/modals";
 import NotesBar from "./NotesBar";
 import { DeleteIcon, MoreIcon, NewImageIcon } from "../../icons";
 import DragAndDrop from "./DragAndDrop";
+import ProgressBar from "../Main/ProgressBar";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 // journal-app
 
 const Notes = () => {
   const { active: note } = useSelector((state) => state.notes);
+  const { card } = useSelector((state) => state.modals);
 
   const initialState = {
     body: note.body,
@@ -37,8 +39,6 @@ const Notes = () => {
   const handleUpdateNote = (updatedNote) =>
     dispatch(updateNote(note.id, updatedNote));
 
-  const handleDeleteNote = () => dispatch(deleteNote(note.id));
-
   const handleChangeText = ({ target }) => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
   };
@@ -51,8 +51,18 @@ const Notes = () => {
     }
   };
 
+  const handleShowCardModal = () => {
+    dispatch(showCardModal());
+  };
+
   const handleChooseFile = () => {
     document.querySelector("#file").click();
+    handleShowCardModal();
+  };
+
+  const handleDeleteNote = () => {
+    dispatch(deleteNote(note.id));
+    handleShowCardModal();
   };
 
   const dayFormatted = dayjs(date).format("DD");
@@ -66,12 +76,16 @@ const Notes = () => {
     <div className="notes__container">
       <NotesBar />
 
-      <div onClick={() => dispatch(hideModal())} className="notes__content">
+      <div className="notes__content">
         <div className="notes__card">
           {imageURL ? (
             <>
               <div className="notes__image">
-                <img src={imageURL} alt={title} />
+                {note.loading ? (
+                  <ProgressBar />
+                ) : (
+                  <img src={imageURL} alt={title} />
+                )}
               </div>
 
               <div className="notes__date">
@@ -79,27 +93,32 @@ const Notes = () => {
                 <span>{monthFormatted}</span>
               </div>
 
-              <button className="big_button_rounded">
+              <button
+                className="big_button_rounded"
+                onClick={handleShowCardModal}
+              >
                 <MoreIcon />
               </button>
 
-              <div className="notes__modal_card">
-                <ul>
-                  <li>
-                    <button onClick={handleChooseFile}>
-                      <NewImageIcon />
-                      <span>New image</span>
-                    </button>
-                  </li>
+              {card && (
+                <div className="notes__modal_card">
+                  <ul>
+                    <li>
+                      <button onClick={handleChooseFile}>
+                        <NewImageIcon />
+                        <span>New image</span>
+                      </button>
+                    </li>
 
-                  <li>
-                    <button onClick={handleDeleteNote}>
-                      <DeleteIcon />
-                      <span>Delete note</span>
-                    </button>
-                  </li>
-                </ul>
-              </div>
+                    <li>
+                      <button onClick={handleDeleteNote}>
+                        <DeleteIcon />
+                        <span>Delete note</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </>
           ) : (
             <DragAndDrop {...noteForm} handleChooseFile={handleChooseFile} />
