@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import dayjs from "dayjs";
-import { useDispatch, useSelector } from "react-redux";
-import { updateNote, fileUpload, deleteNote } from "../../actions/notes";
-import { showCardModal } from "../../actions/modals";
-import NotesBar from "./NotesBar";
-import { DeleteIcon, MoreIcon, NewImageIcon } from "../../icons";
-import DragAndDrop from "./DragAndDrop";
-import ProgressBar from "../Main/ProgressBar";
+import React, { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNote, fileUpload, deleteNote } from '../../actions/notes';
+import { showCardModal } from '../../actions/modals';
+import NotesBar from './NotesBar';
+import { DeleteIcon, MoreIcon, NewImageIcon } from '../../icons';
+import DragAndDrop from './DragAndDrop';
+import ProgressBar from '../Main/ProgressBar';
 
-const relativeTime = require("dayjs/plugin/relativeTime");
-// journal-app
+const relativeTime = require('dayjs/plugin/relativeTime');
 
 const Notes = () => {
   const { active: note } = useSelector((state) => state.notes);
@@ -28,16 +27,13 @@ const Notes = () => {
 
   useEffect(() => {
     setNoteForm(initialState);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [note.title, note.body, note.imageURL, note.updated]);
 
   const { body, date, imageURL, updated, title } = noteForm;
 
   const dispatch = useDispatch();
 
-  const handleUpdateNote = (updatedNote) =>
-    dispatch(updateNote(note.id, updatedNote));
+  const handleUpdateNote = (updatedNote) => dispatch(updateNote(note.id, updatedNote));
 
   const handleChangeText = ({ target }) => {
     setNoteForm({ ...noteForm, [target.name]: target.value });
@@ -56,7 +52,7 @@ const Notes = () => {
   };
 
   const handleChooseFile = () => {
-    document.querySelector("#file").click();
+    document.querySelector('#file').click();
     handleShowCardModal();
   };
 
@@ -65,8 +61,8 @@ const Notes = () => {
     handleShowCardModal();
   };
 
-  const dayFormatted = dayjs(date).format("DD");
-  const monthFormatted = dayjs(date).format("MMM");
+  const dayFormatted = dayjs(date).format('DD');
+  const monthFormatted = dayjs(date).format('MMM');
 
   dayjs.extend(relativeTime);
 
@@ -81,11 +77,7 @@ const Notes = () => {
           {imageURL ? (
             <>
               <div className="notes__image">
-                {note.loading ? (
-                  <ProgressBar />
-                ) : (
-                  <img src={imageURL} alt={title} />
-                )}
+                {note.loading ? <ProgressBar /> : <img src={imageURL} alt={title} />}
               </div>
 
               <div className="notes__date">
@@ -93,10 +85,7 @@ const Notes = () => {
                 <span>{monthFormatted}</span>
               </div>
 
-              <button
-                className="big_button_rounded"
-                onClick={handleShowCardModal}
-              >
+              <button className="big_button_rounded" type="button" onClick={handleShowCardModal}>
                 <MoreIcon />
               </button>
 
@@ -104,14 +93,14 @@ const Notes = () => {
                 <div className="notes__modal_card">
                   <ul>
                     <li>
-                      <button onClick={handleChooseFile}>
+                      <button type="button" onClick={handleChooseFile}>
                         <NewImageIcon />
                         <span>New image</span>
                       </button>
                     </li>
 
                     <li>
-                      <button onClick={handleDeleteNote}>
+                      <button type="button" onClick={handleDeleteNote}>
                         <DeleteIcon />
                         <span>Delete note</span>
                       </button>
@@ -150,18 +139,22 @@ const Notes = () => {
               name="file"
               type="file"
               onChange={handleChangeFile}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
             />
 
             <div className="notes__card_footer">
               {updated ? (
-                <span>Updated {lastUpdated}</span>
+                <span>
+                  Updated
+                  {lastUpdated}
+                </span>
               ) : (
                 <span>Updating</span>
               )}
 
               <button
                 className="button_primary_sm"
+                type="button"
                 onClick={() =>
                   handleUpdateNote({
                     body,
@@ -169,8 +162,8 @@ const Notes = () => {
                     imageURL,
                     title,
                     updated: new Date().getTime(),
-                  })
-                }
+                    // eslint-disable-next-line prettier/prettier
+                  })}
               >
                 Save changes
               </button>

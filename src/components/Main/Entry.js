@@ -1,16 +1,16 @@
-import React from "react";
-import dayjs from "dayjs";
-import { useDispatch } from "react-redux";
-import { activeNote } from "../../actions/notes";
-import { handleSidebar } from "../../actions/modals";
+import React from 'react';
+import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { activeNote } from '../../actions/notes';
+import { handleSidebar } from '../../actions/modals';
 
-const Entry = ({ body, date, id, title, imageURL, updated }) => {
-  const dateFormatted = dayjs(date).format("ddd, DD MMM.");
+const Entry = ({ body, date, id, imageURL, title, updated }) => {
+  const dateFormatted = dayjs(date).format('ddd, DD MMM.');
 
   const dispatch = useDispatch();
 
   const handleActiveNote = () => {
-    //dispatch(getNote(id));
     dispatch(activeNote(id, { body, date, id, imageURL, title, updated }));
     dispatch(handleSidebar());
   };
@@ -23,7 +23,7 @@ const Entry = ({ body, date, id, title, imageURL, updated }) => {
           style={{
             backgroundImage: `url(${imageURL})`,
           }}
-        ></div>
+        />
       )}
 
       <div className="main__entry_content">
@@ -38,6 +38,15 @@ const Entry = ({ body, date, id, title, imageURL, updated }) => {
       </div>
     </div>
   );
+};
+
+Entry.propTypes = {
+  body: PropTypes.string.isRequired,
+  date: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  updated: PropTypes.number,
 };
 
 export default Entry;

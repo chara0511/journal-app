@@ -1,14 +1,15 @@
-import axios from "axios";
-import { db } from "../firebase/firebasConfig";
+import axios from 'axios';
+import { db } from '../firebase/firebasConfig';
 import {
   ACTIVE_NOTE,
   ADD_NOTE,
   DELETE_NOTE,
+  ERROR_NOTE,
   FILE_UPLOADING,
   LOADING_NOTES,
   LOG_OUT_CLEANING,
   UPDATE_NOTE,
-} from "../types";
+} from '../types';
 
 export const activeNote = (id, note) => ({
   type: ACTIVE_NOTE,
@@ -20,70 +21,77 @@ const addedNote = (id, newNote) => ({
   payload: { id, ...newNote },
 });
 
+const errorNote = (err) => ({
+  type: ERROR_NOTE,
+  payload: err,
+});
+
 export const addNote = () => async (dispatch, getState) => {
   try {
     const { uid } = getState().auth;
 
     const newNote = {
-      body: "",
+      body: '',
       date: new Date().getTime(),
       imageURL: null,
       loading: null,
-      title: "",
+      title: '',
       updated: null,
     };
 
-    const docReference = await db
-      .collection(`${uid}/journal/notes`)
-      .add(newNote);
+    const docReference = await db.collection(`${uid}/journal/notes`).add(newNote);
 
     dispatch(activeNote(docReference.id, newNote));
     dispatch(addedNote(docReference.id, newNote));
   } catch (error) {
-    console.log(error);
+    dispatch(errorNote(error.message));
   }
 };
 
 const getNotes = async (uid) => {
-  try {
-    const querySnapshot = await db.collection(`${uid}/journal/notes`).get();
+  const querySnapshot = await db.collection(`${uid}/journal/notes`).get();
 
-    const notes = [];
+  const notes = [];
 
-    querySnapshot.forEach((note) => {
-      notes.push({ id: note.id, ...note.data() });
-    });
+  querySnapshot.forEach((note) => {
+    notes.push({ id: note.id, ...note.data() });
+  });
 
-    return notes;
-  } catch (error) {
-    console.log(error);
-  }
+  return notes;
 };
 
 const loadedNotes = (notes) => ({ type: LOADING_NOTES, payload: notes });
 
 export const loadingNotes = (uid) => async (dispatch) => {
-  const notes = await getNotes(uid);
+  try {
+    const notes = await getNotes(uid);
 
-  dispatch(loadedNotes(notes));
+    dispatch(loadedNotes(notes));
+  } catch (error) {
+    dispatch(errorNote(error.message));
+  }
 };
 
 // Other option to get a note (Lazy load).
 
-export const getNote = (id) => async (dispatch, getState) => {
-  try {
-    const { uid } = getState().auth;
+// export const getNote = (id) => async (dispatch, getState) => {
+//   try {
+//     const { uid } = getState().auth;
 
-    const docSnapshot = await db
-      .collection(`${uid}/journal/notes`)
-      .doc(id)
-      .get();
+//     const docSnapshot = await db
+//       .collection(`${uid}/journal/notes`)
+//       .doc(id)
+//       .get();
 
-    dispatch(activeNote(id, docSnapshot.data()));
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     dispatch(activeNote(id, docSnapshot.data()));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+const updatedNote = (id, note) => ({
+  type: UPDATE_NOTE,
+  payload: { id, ...note },
+});
 
 export const updateNote = (id, note) => async (dispatch, getState) => {
   try {
@@ -93,43 +101,38 @@ export const updateNote = (id, note) => async (dispatch, getState) => {
 
     dispatch(updatedNote(id, note));
   } catch (error) {
-    console.log(error);
-  }
-};
-
-const updatedNote = (id, note) => ({
-  type: UPDATE_NOTE,
-  payload: { id, ...note },
-});
-
-export const fileUpload = (file, note) => async (dispatch, getState) => {
-  dispatch(fileUploading());
-
-  const { active: activeNote } = getState().notes;
-
-  const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
-
-  const formData = new FormData();
-  formData.append("upload_preset", "journal-app");
-  formData.append("file", file);
-
-  try {
-    const response = await axios.post(cloudinaryURL, formData);
-    console.log(getState().notes);
-    activeNote.title = note.title;
-    activeNote.body = note.body;
-    activeNote.imageURL = response.data.secure_url;
-    activeNote.updated = new Date().getTime();
-
-    dispatch(updateNote(activeNote.id, activeNote));
-  } catch (error) {
-    console.log(error);
+    dispatch(errorNote(error.message));
   }
 };
 
 const fileUploading = () => ({
   type: FILE_UPLOADING,
 });
+
+export const fileUpload = (file, note) => async (dispatch, getState) => {
+  dispatch(fileUploading());
+
+  const { active } = getState().notes;
+
+  const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dfvra50ch/upload';
+
+  const formData = new FormData();
+  formData.append('upload_preset', 'journal-app');
+  formData.append('file', file);
+
+  try {
+    const response = await axios.post(cloudinaryURL, formData);
+
+    active.title = note.title;
+    active.body = note.body;
+    active.imageURL = response.data.secure_url;
+    active.updated = new Date().getTime();
+
+    dispatch(updateNote(active.id, active));
+  } catch (error) {
+    dispatch(errorNote(error.message));
+  }
+};
 
 // export const fileUpload = (file, note) => async (dispatch) => {
 //   const cloudinaryURL = "https://api.cloudinary.com/v1_1/dfvra50ch/upload";
@@ -151,6 +154,11 @@ const fileUploading = () => ({
 //   }
 // };
 
+const deletedNote = (id) => ({
+  type: DELETE_NOTE,
+  payload: id,
+});
+
 export const deleteNote = (id) => async (dispatch, getState) => {
   try {
     const { uid } = getState().auth;
@@ -159,14 +167,9 @@ export const deleteNote = (id) => async (dispatch, getState) => {
 
     dispatch(deletedNote(id));
   } catch (error) {
-    console.log(error);
+    dispatch(errorNote(error.message));
   }
 };
-
-const deletedNote = (id) => ({
-  type: DELETE_NOTE,
-  payload: id,
-});
 
 export const logOutCleaning = () => ({
   type: LOG_OUT_CLEANING,

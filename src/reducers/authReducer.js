@@ -8,7 +8,7 @@
   }
 */
 
-import { ERROR, LOADING, LOG_IN, LOG_OUT } from "../types";
+import { ERROR, LOADING, LOG_IN, LOG_OUT } from '../types';
 
 export const authReducer = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +22,7 @@ export const authReducer = (state = {}, action) => {
         uid: action.payload.uid,
         displayName: action.payload.displayName,
         loading: false,
+        email: action.payload.email,
         photoURL: action.payload.photoURL,
       };
 

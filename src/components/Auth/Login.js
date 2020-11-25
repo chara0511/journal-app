@@ -1,20 +1,16 @@
-import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { logIn, logInByGoogle } from "../../actions/auth";
-import { useFormValidation } from "../../hooks/useFormValidation";
-import { EmailIcon, PasswordIcon } from "../../icons";
-import AlertError from "../../utils/auth/AlertError";
-import { validateLogIn } from "../../validations";
+import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logIn, logInByGoogle } from '../../actions/auth';
+import { useFormValidation } from '../../hooks/useFormValidation';
+import { EmailIcon, PasswordIcon } from '../../icons';
+import AlertError from '../../utils/auth/AlertError';
+import { validateLogIn } from '../../validations';
 
 const Login = () => {
-  const initialState = { email: "", password: "" };
+  const initialState = { email: '', password: '' };
 
   const dispatch = useDispatch();
-
-  const successLogIn = () => {
-    dispatch(logIn(email, password));
-  };
 
   const ref = useRef(null);
 
@@ -24,7 +20,9 @@ const Login = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-  } = useFormValidation(initialState, validateLogIn, successLogIn);
+  } = useFormValidation(initialState, validateLogIn, () => {
+    dispatch(logIn(email, password));
+  });
 
   const { loading, error } = useSelector((state) => state.auth);
 
@@ -54,7 +52,7 @@ const Login = () => {
           </span>
         </div>
 
-        {<AlertError error={errors.email} />}
+        <AlertError error={errors.email} />
 
         <div className="auth__input">
           <input
@@ -72,17 +70,13 @@ const Login = () => {
           </span>
         </div>
 
-        {<AlertError error={errors.password} />}
+        <AlertError error={errors.password} />
 
-        <button
-          className="button button_primary"
-          type="submit"
-          disabled={loading}
-        >
+        <button className="button button_primary" type="submit" disabled={loading}>
           Log in
         </button>
 
-        {<AlertError error={error} />}
+        <AlertError error={error} />
 
         <div className="auth__social_networks">
           <p>or</p>
@@ -105,7 +99,7 @@ const Login = () => {
         </div>
 
         <p className="auth__utils">
-          Don't have an account yet?{" "}
+          Don&apos;t have an account yet?
           <span>
             <Link to="/auth/signup">Sign up</Link>
           </span>

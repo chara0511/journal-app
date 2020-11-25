@@ -1,28 +1,26 @@
-import { firebase, googleAuthProvider } from "../firebase/firebasConfig";
-import { ERROR, LOADING, LOG_IN, LOG_OUT } from "../types";
+import { firebase, googleAuthProvider } from '../firebase/firebasConfig';
+import { ERROR, LOADING, LOG_IN, LOG_OUT } from '../types';
 
 const loading = () => ({ type: LOADING });
 
-export const loggedIn = (uid, displayName, photoURL) => ({
+export const loggedIn = (uid, displayName, photoURL, email) => ({
   type: LOG_IN,
-  payload: { uid, displayName, photoURL },
+  payload: { uid, displayName, photoURL, email },
 });
 
-const loginError = (message) => ({ type: ERROR, payload: message });
+const handleError = (message) => ({ type: ERROR, payload: message });
 
 export const logIn = (email, password) => async (dispatch) => {
   dispatch(loading());
 
   try {
-    const userCreadential = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
+    const userCreadential = await firebase.auth().signInWithEmailAndPassword(email, password);
 
     const { user } = userCreadential;
 
-    dispatch(loggedIn(user.uid, user.displayName, user.photoURL));
+    dispatch(loggedIn(user.uid, user.displayName, user.photoURL, user.email));
   } catch (error) {
-    dispatch(loginError(error.message));
+    dispatch(handleError(error.message));
   }
 };
 
@@ -33,7 +31,10 @@ export const logInByGoogle = () => (dispatch) => {
     .auth()
     .signInWithPopup(googleAuthProvider)
     .then(({ user }) => {
-      dispatch(loggedIn(user.uid, user.displayName, user.photoURL));
+      dispatch(loggedIn(user.uid, user.displayName, user.photoURL, user.email));
+    })
+    .catch((err) => {
+      dispatch(handleError(err.message));
     });
 };
 
@@ -41,21 +42,19 @@ export const signUp = (name, email, password) => async (dispatch) => {
   dispatch(loading());
 
   try {
-    const userCredential = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
+    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
     const { user } = userCredential;
 
     await user.updateProfile({
       displayName: name,
       photoURL:
-        "https://res.cloudinary.com/dfvra50ch/image/upload/v1604645514/fen6llewdeoiizwjxy4b.png",
+        'https://res.cloudinary.com/dfvra50ch/image/upload/v1604645514/fen6llewdeoiizwjxy4b.png',
     });
 
-    dispatch(loggedIn(user.uid, user.displayName, user.photoURL));
+    dispatch(loggedIn(user.uid, user.displayName, user.photoURL, user.email));
   } catch (error) {
-    dispatch(loginError(error.message));
+    dispatch(handleError(error.message));
   }
 };
 
@@ -67,6 +66,6 @@ export const logOut = () => async (dispatch) => {
 
     dispatch(loggedOut());
   } catch (error) {
-    console.log(error);
+    dispatch(handleError(error.message));
   }
 };

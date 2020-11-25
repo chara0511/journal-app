@@ -1,4 +1,4 @@
-import { ADD_DROP_ZONE } from "../types";
+import { ADD_DROP_ZONE } from '../types';
 
 export const dragEnter = () => ({
   type: ADD_DROP_ZONE,

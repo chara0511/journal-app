@@ -8,12 +8,7 @@
   }
 */
 
-import {
-  HIDE_MODAL,
-  HANDLE_SIDEBAR,
-  SHOW_PROFILE_MODAL,
-  SHOW_CARD_MODAL,
-} from "../types";
+import { HIDE_MODAL, HANDLE_SIDEBAR, SHOW_PROFILE_MODAL, SHOW_CARD_MODAL } from '../types';
 
 const initialState = {
   card: null,

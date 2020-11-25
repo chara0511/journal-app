@@ -1,11 +1,12 @@
-import React from "react";
-import { ErrorIcon } from "../../icons";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ErrorIcon } from '../../icons';
 
 const AlertError = ({ error }) => {
-  const visibility = error ? "visible" : "hidden";
+  const visibility = error ? 'visible' : 'hidden';
 
   return (
-    <div className="auth__alert_error" style={{ visibility: visibility }}>
+    <div className="auth__alert_error" style={{ visibility }}>
       <span>
         <ErrorIcon />
       </span>
@@ -15,4 +16,7 @@ const AlertError = ({ error }) => {
   );
 };
 
+AlertError.propTypes = {
+  error: PropTypes.bool.isRequired,
+};
 export default AlertError;

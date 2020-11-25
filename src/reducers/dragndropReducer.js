@@ -7,7 +7,7 @@
   }
 */
 
-import { ADD_DROP_ZONE } from "../types";
+import { ADD_DROP_ZONE } from '../types';
 
 const initialState = {
   inDropZone: null,

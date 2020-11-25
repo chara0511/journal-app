@@ -1,9 +1,4 @@
-import {
-  HIDE_MODAL,
-  HANDLE_SIDEBAR,
-  SHOW_PROFILE_MODAL,
-  SHOW_CARD_MODAL,
-} from "../types";
+import { HIDE_MODAL, HANDLE_SIDEBAR, SHOW_PROFILE_MODAL, SHOW_CARD_MODAL } from '../types';
 
 export const handleSidebar = () => ({
   type: HANDLE_SIDEBAR,

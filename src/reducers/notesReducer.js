@@ -15,15 +15,17 @@ import {
   ACTIVE_NOTE,
   ADD_NOTE,
   DELETE_NOTE,
+  ERROR_NOTE,
   FILE_UPLOADING,
   LOADING_NOTES,
   LOG_OUT_CLEANING,
   UPDATE_NOTE,
-} from "../types";
+} from '../types';
 
 const initialState = {
   active: null,
   notes: [],
+  error: null,
 };
 
 export const notesReducer = (state = initialState, action) => {
@@ -38,12 +40,19 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         notes: [action.payload, ...state.notes],
+        error: null,
       };
 
     case LOADING_NOTES:
       return {
         ...state,
         notes: [...action.payload],
+      };
+
+    case ERROR_NOTE:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     case FILE_UPLOADING:
@@ -56,9 +65,8 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         active: { ...state.active, loading: false },
-        notes: state.notes.map((note) =>
-          note.id === action.payload.id ? action.payload : note
-        ),
+        notes: state.notes.map((note) => (note.id === action.payload.id ? action.payload : note)),
+        error: null,
       };
 
     case DELETE_NOTE:

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { firebase } from "../firebase/firebasConfig";
-import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
-
-import { loggedIn } from "../actions/auth";
-import { loadingNotes } from "../actions/notes";
-import AuthRoutes from "./AuthRoutes";
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
-import Main from "../components/Main/Main";
-import Profile from "../components/Profile/Profile";
-import LoadingPage from "../components/Main/LoadingPage";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { firebase } from '../firebase/firebasConfig';
+import { loggedIn } from '../actions/auth';
+import { loadingNotes } from '../actions/notes';
+import AuthRoutes from './AuthRoutes';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
+import Main from '../components/Main/Main';
+import Profile from '../components/Profile/Profile';
+import LoadingPage from '../components/Main/LoadingPage';
 
 const MainRouter = () => {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ const MainRouter = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
-        dispatch(loggedIn(user.uid, user.displayName, user.photoURL));
+        dispatch(loggedIn(user.uid, user.displayName, user.photoURL, user.email));
 
         dispatch(loadingNotes(user.uid));
 
@@ -33,8 +32,6 @@ const MainRouter = () => {
         setIsLoading(false);
       }
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
@@ -45,19 +42,10 @@ const MainRouter = () => {
     <Router>
       <div>
         <Switch>
-          <PublicRoute
-            path="/auth"
-            isLogged={isLogged}
-            component={AuthRoutes}
-          />
+          <PublicRoute path="/auth" isLogged={isLogged} component={AuthRoutes} />
 
           <PrivateRoute exact path="/" isLogged={isLogged} component={Main} />
-          <PrivateRoute
-            exact
-            path="/profile"
-            isLogged={isLogged}
-            component={Profile}
-          />
+          <PrivateRoute exact path="/profile" isLogged={isLogged} component={Profile} />
           <Redirect to="/auth/login" />
         </Switch>
       </div>

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { hideModal } from "../actions/modals";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { hideModal } from '../actions/modals';
 
 export const useClickOutside = (ref) => {
   const dispatch = useDispatch();
@@ -12,12 +12,10 @@ export const useClickOutside = (ref) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 };

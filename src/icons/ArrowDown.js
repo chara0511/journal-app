@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const ArrowDown = () => {
   const { profile } = useSelector((state) => state.modals);
 
-  const rotate = profile ? "rotate(180deg)" : "rotate(0deg)";
+  const rotate = profile ? 'rotate(180deg)' : 'rotate(0deg)';
 
   return (
     <svg
@@ -14,8 +14,8 @@ const ArrowDown = () => {
       viewBox="0 0 24 24"
       style={{ transform: rotate }}
     >
-      <path fill="none" d="M0 0h24v24H0V0z"></path>
-      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+      <path fill="none" d="M0 0h24v24H0V0z" />
+      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
     </svg>
   );
 };

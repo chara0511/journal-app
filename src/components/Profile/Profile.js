@@ -1,7 +1,10 @@
-import React from "react";
-import NotesBar from "../Notes/NotesBar";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import NotesBar from '../Notes/NotesBar';
 
 const Profile = () => {
+  const { displayName, photoURL, email } = useSelector((state) => state.auth);
+
   return (
     <div className="profile__container">
       <NotesBar />
@@ -19,32 +22,34 @@ const Profile = () => {
               <p>Some info may be visible to other people.</p>
             </div>
 
-            <button>Edit</button>
+            <button disabled type="button">
+              Edit
+            </button>
           </div>
 
           <div className="profile__wrapper">
             <p className="profile__wrapper_key">PHOTO</p>
-            <img src="/" alt="profile" />
+            <img src={photoURL} alt="profile" />
           </div>
 
           <div className="profile__wrapper">
             <p className="profile__wrapper_key">NAME</p>
-            <h3>Chara -</h3>
+            <h3>{displayName}</h3>
           </div>
 
           <div className="profile__wrapper">
             <p className="profile__wrapper_key">BIO</p>
-            <h3>I'm a software developer ...</h3>
+            <h3>-</h3>
           </div>
 
           <div className="profile__wrapper">
             <p className="profile__wrapper_key">PHONE</p>
-            <h3>946544420</h3>
+            <h3>-</h3>
           </div>
 
           <div className="profile__wrapper">
             <p className="profile__wrapper_key">EMAIL</p>
-            <h3>escor05_11@hotmail.com</h3>
+            <h3>{email}</h3>
           </div>
 
           <div className="profile__wrapper">

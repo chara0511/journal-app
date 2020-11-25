@@ -1,11 +1,14 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { dragEnter, dragOver } from "../../actions/dragndrop";
-import { fileUpload } from "../../actions/notes";
-import Landscape from "../../images/Landscape";
-import ProgressBar from "../Main/ProgressBar";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { dragEnter, dragOver } from '../../actions/dragndrop';
+import { fileUpload } from '../../actions/notes';
+import Landscape from '../../images/Landscape';
+import ProgressBar from '../Main/ProgressBar';
 
 const DragAndDrop = (props) => {
+  const { handleChooseFile } = props;
+
   const dispatch = useDispatch();
 
   const { loading } = useSelector((state) => state.notes.active);
@@ -17,7 +20,7 @@ const DragAndDrop = (props) => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
+    e.dataTransfer.dropEffect = 'move';
     dispatch(dragOver());
   };
 
@@ -38,20 +41,22 @@ const DragAndDrop = (props) => {
       >
         <p>File should be Jpeg, Png ...</p>
 
-        <div className="notes__dragndrop_image">
-          {loading ? <ProgressBar /> : <Landscape />}
-        </div>
+        <div className="notes__dragndrop_image">{loading ? <ProgressBar /> : <Landscape />}</div>
 
-        <p>Drag {"&"} Drop your image here </p>
+        <p>Drag & Drop your image here</p>
       </div>
 
       <p>or</p>
 
-      <button className="button_secondary_sm" onClick={props.handleChooseFile}>
+      <button className="button_secondary_sm" type="button" onClick={handleChooseFile}>
         Choose a file
       </button>
     </div>
   );
+};
+
+DragAndDrop.propTypes = {
+  handleChooseFile: PropTypes.func.isRequired,
 };
 
 export default DragAndDrop;

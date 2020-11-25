@@ -1,28 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import AlertError from "../../utils/auth/AlertError";
-import { useFormValidation } from "../../hooks/useFormValidation";
-import { validateSignUp } from "../../validations";
-import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "../../actions/auth";
-import { EmailIcon, PasswordIcon, UsernameIcon } from "../../icons";
+import { useDispatch, useSelector } from 'react-redux';
+import AlertError from '../../utils/auth/AlertError';
+import { useFormValidation } from '../../hooks/useFormValidation';
+import { validateSignUp } from '../../validations';
+import { signUp } from '../../actions/auth';
+import { EmailIcon, PasswordIcon, UsernameIcon } from '../../icons';
 
 const Signup = () => {
   const initialState = {
-    name: "example",
-    email: "example@gmail.com",
-    password: "123456",
-    confirmPassword: "123456",
+    name: 'example',
+    email: 'example@gmail.com',
+    password: '123456',
+    confirmPassword: '123456',
   };
 
   const dispatch = useDispatch();
-
-  const successSignUp = () => {
-    console.log({ name, email, password });
-
-    dispatch(signUp(name, email, password));
-  };
 
   const {
     values: { name, email, password, confirmPassword },
@@ -30,7 +24,9 @@ const Signup = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useFormValidation(initialState, validateSignUp, successSignUp);
+  } = useFormValidation(initialState, validateSignUp, () => {
+    dispatch(signUp(name, email, password));
+  });
 
   const { loading, error } = useSelector((state) => state.auth);
 
@@ -111,11 +107,7 @@ const Signup = () => {
 
         <AlertError error={errors.confirmPassword} />
 
-        <button
-          className="button button_primary"
-          type="submit"
-          disabled={loading}
-        >
+        <button className="button button_primary" type="submit" disabled={loading}>
           Sign up
         </button>
 
@@ -139,7 +131,7 @@ const Signup = () => {
           </div>
 
           <p className="auth__utils">
-            Already a member?{" "}
+            Already a member?
             <span>
               <Link to="/auth/login">Log in</Link>
             </span>
