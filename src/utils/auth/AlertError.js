@@ -17,6 +17,6 @@ const AlertError = ({ error }) => {
 };
 
 AlertError.propTypes = {
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 };
 export default AlertError;

@@ -85,7 +85,11 @@
   margin: 1em 0;
   text-align: center;
 
-  & a {
+  & span {
+    margin-left: 8px;
+  }
+
+  & span a {
     color: $primary;
     font-weight: 600;
   }

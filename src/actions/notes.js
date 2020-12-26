@@ -88,6 +88,7 @@ export const loadingNotes = (uid) => async (dispatch) => {
 //     console.log(error);
 //   }
 // };
+
 const updatedNote = (id, note) => ({
   type: UPDATE_NOTE,
   payload: { id, ...note },

@@ -1,68 +1,80 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Journal App</h1>
 
-## Available Scripts
+<div align="center">
+  <h3>
+    <a href="https://journal-app-gamma.vercel.app/auth/login" target="_blank" >
+      Demo
+    </a>
+  </h3>
+</div>
 
-In the project directory, you can run:
+<!-- TABLE OF CONTENTS -->
 
-### `npm start`
+## 🔥 Table of Contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Overview](#overview)
+  - [Built With](#built-with)
+- [How to use](#how-to-use)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<!-- OVERVIEW -->
 
-### `npm test`
+## Overview
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<details>
+  <summary>💻 Desktop version</summary>
 
-### `npm run build`
+![screenshot](/public/desktop-version.png)
+![screenshot](/public/desktop-version2.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</details>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<details>
+  <summary>📱 Mobile version</summary>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![screenshot](/public/mobile-version.png)
+![screenshot](/public/mobile-version2.png)
 
-### `npm run eject`
+</details>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Built With
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Firebase](https://firebase.google.com)
+- [Javascript](https://developer.mozilla.org/es/docs/Web/JavaScript)
+- [React](https://redux.js.org)
+- [Redux](https://reactjs.org)
+- [Sass](https://sass-lang.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## How To Use
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
-## Learn More
+```bash
+# Clone this repository
+$ git clone https://github.com/jcarlos0511/journal-app.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Enter the created folder
+$ cd journal-app
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Install dependencies
+$ npm install
 
-### Code Splitting
+# Run the app
+$ npm start
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+# Visit http://localhost:3000/
+```
 
-### Analyzing the Bundle Size
+## Acknowledgements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- [Getting started with react-redux-firebase](https://blog.logrocket.com/getting-started-react-redux-firebase)
+- [Firebase for Beginners](https://dev.to/sm0ke/firebase-short-introduction-for-beginners-24d8)
+- [Sass for Beginners](https://dev.to/teddcp/sass-for-beginners-3mbl)
+- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
+- [Marked - a markdown parser](https://github.com/chjj/marked)
 
-### Making a Progressive Web App
+## Contact
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- GitHub [@jcarlos0511](https://github.com/jcarlos0511)
+- Twitter [@charalopez0511](https://twitter.com/charalopez0511)

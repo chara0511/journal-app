@@ -10,10 +10,10 @@ import { EmailIcon, PasswordIcon, UsernameIcon } from '../../icons';
 
 const Signup = () => {
   const initialState = {
-    name: 'example',
-    email: 'example@gmail.com',
-    password: '123456',
-    confirmPassword: '123456',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   };
 
   const dispatch = useDispatch();
@@ -79,6 +79,7 @@ const Signup = () => {
             value={password}
             onBlur={handleBlur}
             onChange={handleChange}
+            autoComplete="on"
             placeholder="Password"
           />
 
@@ -97,6 +98,7 @@ const Signup = () => {
             value={confirmPassword}
             onBlur={handleBlur}
             onChange={handleChange}
+            autoComplete="on"
             placeholder="Confirm Password"
           />
 
